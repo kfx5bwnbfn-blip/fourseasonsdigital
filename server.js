@@ -52,10 +52,11 @@ app.get('/api/statuses/:itemKey', async (req, res) => {
 // Update or create a status override
 app.put('/api/statuses/:itemKey', async (req, res) => {
   const { itemKey } = req.params;
-  const { status, updatedBy, note } = req.body;
+  const { status, note } = req.body;
+  const updatedBy = req.body.updatedBy || req.body.changedBy;
 
   if (!status || !updatedBy) {
-    return res.status(400).json({ error: 'status and updatedBy are required' });
+    return res.status(400).json({ error: 'status and changedBy are required' });
   }
 
   const client = await pool.connect();

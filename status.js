@@ -102,12 +102,14 @@ async function fetchHistory(itemKey) {
 }
 
 // Save a status change via the API
-async function saveStatusOverride(itemKey, newStatus, changedBy) {
+async function saveStatusOverride(itemKey, newStatus, changedBy, oldStatus) {
   try {
+    const body = { status: newStatus, changedBy: changedBy };
+    if (oldStatus) body.oldStatus = oldStatus;
     const resp = await fetch('/api/statuses/' + encodeURIComponent(itemKey), {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status: newStatus, changedBy: changedBy })
+      body: JSON.stringify(body)
     });
     if (!resp.ok) throw new Error('Failed to save status');
     const data = await resp.json();
