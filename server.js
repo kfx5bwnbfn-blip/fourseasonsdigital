@@ -195,6 +195,27 @@ app.get('/api/history/:itemKey', async (req, res) => {
   }
 });
 
+// Delete a status override (and its history)
+app.delete('/api/statuses/:itemKey', async (req, res) => {
+  if (!_dbReady) {
+    return res.status(503).json({ error: 'Database not ready' });
+  }
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query('DELETE FROM status_history WHERE item_key = $1', [req.params.itemKey]);
+    await client.query('DELETE FROM status_overrides WHERE item_key = $1', [req.params.itemKey]);
+    await client.query('COMMIT');
+    res.json({ success: true });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error deleting status:', err.message);
+    res.status(500).json({ error: 'Failed to delete status' });
+  } finally {
+    client.release();
+  }
+});
+
 // Get all history (for reporting)
 app.get('/api/history', async (req, res) => {
   if (!_dbReady) {
