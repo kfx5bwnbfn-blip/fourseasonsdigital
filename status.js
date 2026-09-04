@@ -142,7 +142,11 @@ async function saveStatusOverride(itemKey, newStatus, changedBy, oldStatus) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    if (!resp.ok) throw new Error('Failed to save status');
+    if (!resp.ok) {
+      const errData = await resp.json().catch(() => ({}));
+      const msg = errData.error || 'Failed to save status';
+      throw new Error(msg);
+    }
     const data = await resp.json();
     // Update local cache
     _statusOverrides[itemKey] = newStatus;

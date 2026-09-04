@@ -319,7 +319,7 @@ async function saveStatus(itemKey, i) {
   try {
     await saveStatusOverride(itemKey, newStatus, name, oldStatus);
   } catch (e) {
-    errorEl.textContent = 'Error saving status. Please try again.';
+    errorEl.textContent = 'Error saving status: ' + (e.message || 'Please try again.');
     errorEl.classList.add('show');
     return;
   }

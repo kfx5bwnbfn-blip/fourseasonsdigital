@@ -6,7 +6,7 @@ const { Pool } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Database connection
+// Database connection — with connection timeout and error handling
 const pool = new Pool({
   host: process.env.DB_HOST || 'db',
   port: process.env.DB_PORT || 5432,
@@ -14,12 +14,31 @@ const pool = new Pool({
   user: process.env.DB_USER || 'fs_tracker',
   password: process.env.DB_PASSWORD || 'fs_tracker_secret',
   ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+  connectionTimeoutMillis: 10000,
+  idleTimeoutMillis: 30000,
+  max: 10,
 });
+
+// Log DB config (without password) for debugging
+console.log('DB config:', {
+  host: process.env.DB_HOST || 'db',
+  port: process.env.DB_PORT || 5432,
+  database: process.env.DB_NAME || 'baymard_tracker',
+  user: process.env.DB_USER || 'fs_tracker',
+  ssl: process.env.DB_SSL === 'true',
+});
+
+// Handle pool errors so they don't crash the app
+pool.on('error', (err) => {
+  console.error('Unexpected database pool error:', err.message);
+});
+
+let _dbReady = false;
 
 // Middleware
 app.use(cors());
 
-// Disable caching for API and dynamic files so status changes always reflect
+// Disable caching for API and dynamic files
 app.use((req, res, next) => {
   if (req.path.startsWith('/api/') || req.path.endsWith('.json') || req.path.endsWith('.html')) {
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
@@ -41,17 +60,23 @@ app.use(express.static(__dirname, {
 
 // Get all status overrides
 app.get('/api/statuses', async (req, res) => {
+  if (!_dbReady) {
+    return res.json([]);
+  }
   try {
     const result = await pool.query('SELECT item_key, status, updated_by, updated_at FROM status_overrides ORDER BY updated_at DESC');
     res.json(result.rows);
   } catch (err) {
-    console.error('Error fetching statuses:', err);
-    res.status(500).json({ error: 'Failed to fetch statuses' });
+    console.error('Error fetching statuses:', err.message);
+    res.json([]);
   }
 });
 
 // Get status for a specific item
 app.get('/api/statuses/:itemKey', async (req, res) => {
+  if (!_dbReady) {
+    return res.status(404).json({ error: 'Database not ready' });
+  }
   try {
     const result = await pool.query('SELECT item_key, status, updated_by, updated_at FROM status_overrides WHERE item_key = $1', [req.params.itemKey]);
     if (result.rows.length > 0) {
@@ -60,7 +85,7 @@ app.get('/api/statuses/:itemKey', async (req, res) => {
       res.status(404).json({ error: 'No override found' });
     }
   } catch (err) {
-    console.error('Error fetching status:', err);
+    console.error('Error fetching status:', err.message);
     res.status(500).json({ error: 'Failed to fetch status' });
   }
 });
@@ -75,8 +100,13 @@ app.put('/api/statuses/:itemKey', async (req, res) => {
     return res.status(400).json({ error: 'status and changedBy are required' });
   }
 
-  const client = await pool.connect();
+  if (!_dbReady) {
+    return res.status(503).json({ error: 'Database not ready yet. Please try again in a moment.' });
+  }
+
+  let client;
   try {
+    client = await pool.connect();
     await client.query('BEGIN');
 
     // Upsert the status override
@@ -96,7 +126,7 @@ app.put('/api/statuses/:itemKey', async (req, res) => {
       [itemKey, req.body.oldStatus || null, status, updatedBy, note || null]
     );
 
-    // Fetch the full history for this item to return to the client
+    // Fetch the full history for this item
     const historyResult = await client.query(
       'SELECT old_status AS "from", new_status AS "to", changed_by AS by, changed_at AS date FROM status_history WHERE item_key = $1 ORDER BY changed_at DESC',
       [itemKey]
@@ -105,16 +135,21 @@ app.put('/api/statuses/:itemKey', async (req, res) => {
     await client.query('COMMIT');
     res.json({ ...upsertResult.rows[0], history: historyResult.rows });
   } catch (err) {
-    await client.query('ROLLBACK');
-    console.error('Error updating status:', err);
-    res.status(500).json({ error: 'Failed to update status' });
+    if (client) {
+      try { await client.query('ROLLBACK'); } catch (e) {}
+    }
+    console.error('Error updating status:', err.message);
+    res.status(500).json({ error: 'Failed to update status: ' + err.message });
   } finally {
-    client.release();
+    if (client) client.release();
   }
 });
 
 // Get change history for an item
 app.get('/api/history/:itemKey', async (req, res) => {
+  if (!_dbReady) {
+    return res.json([]);
+  }
   try {
     const result = await pool.query(
       'SELECT item_key, old_status, new_status, changed_by, note, changed_at FROM status_history WHERE item_key = $1 ORDER BY changed_at DESC',
@@ -122,13 +157,16 @@ app.get('/api/history/:itemKey', async (req, res) => {
     );
     res.json(result.rows);
   } catch (err) {
-    console.error('Error fetching history:', err);
-    res.status(500).json({ error: 'Failed to fetch history' });
+    console.error('Error fetching history:', err.message);
+    res.json([]);
   }
 });
 
 // Get all history (for reporting)
 app.get('/api/history', async (req, res) => {
+  if (!_dbReady) {
+    return res.json([]);
+  }
   try {
     const limit = Math.min(parseInt(req.query.limit) || 100, 500);
     const result = await pool.query(
@@ -137,20 +175,25 @@ app.get('/api/history', async (req, res) => {
     );
     res.json(result.rows);
   } catch (err) {
-    console.error('Error fetching history:', err);
-    res.status(500).json({ error: 'Failed to fetch history' });
+    console.error('Error fetching history:', err.message);
+    res.json([]);
   }
 });
 
-// Health check
+// Health check — includes DB status
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({ 
+    status: 'ok', 
+    dbReady: _dbReady,
+    timestamp: new Date().toISOString() 
+  });
 });
 
 // Initialize database on startup
 async function initDB() {
   try {
-    await pool.query(`
+    const client = await pool.connect();
+    await client.query(`
       CREATE TABLE IF NOT EXISTS status_overrides (
         item_key VARCHAR(255) PRIMARY KEY,
         status VARCHAR(100) NOT NULL,
@@ -171,9 +214,12 @@ async function initDB() {
       CREATE INDEX IF NOT EXISTS idx_history_item_key ON status_history(item_key);
       CREATE INDEX IF NOT EXISTS idx_history_changed_at ON status_history(changed_at);
     `);
-    console.log('✓ Database initialized');
+    client.release();
+    _dbReady = true;
+    console.log('✓ Database initialized and ready');
   } catch (err) {
     console.error('Database init error:', err.message);
+    _dbReady = false;
     // Retry after delay
     setTimeout(initDB, 5000);
   }
