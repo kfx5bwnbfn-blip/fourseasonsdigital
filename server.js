@@ -6,22 +6,44 @@ const { Pool } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Database connection — uses DATABASE_URL if available (Railway provides this),
-// otherwise falls back to individual DB_* variables.
+// Database connection — auto-detects Railway's PostgreSQL variables
+// Railway injects several variables when a Postgres service is linked.
 let poolConfig;
 
-if (process.env.DATABASE_URL) {
-  // Railway provides DATABASE_URL automatically when a Postgres plugin is added
+// Try all possible connection string variables Railway might provide
+const connectionString = 
+  process.env.DATABASE_URL || 
+  process.env.DATABASE_PRIVATE_URL || 
+  process.env.PGHOST_URL || 
+  process.env.POSTGRES_URL ||
+  process.env.POSTGRES_PRIVATE_URL ||
+  null;
+
+if (connectionString) {
   poolConfig = {
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_SSL === 'false' ? false : { rejectUnauthorized: false },
+    connectionString: connectionString,
+    ssl: { rejectUnauthorized: false },
     connectionTimeoutMillis: 10000,
     idleTimeoutMillis: 30000,
     max: 10,
   };
-  console.log('DB: Using DATABASE_URL connection string');
+  console.log('DB: Using connection string');
+} else if (process.env.PGHOST) {
+  // Railway injects PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD individually
+  poolConfig = {
+    host: process.env.PGHOST,
+    port: process.env.PGPORT || 5432,
+    database: process.env.PGDATABASE || 'railway',
+    user: process.env.PGUSER || 'postgres',
+    password: process.env.PGPASSWORD,
+    ssl: { rejectUnauthorized: false },
+    connectionTimeoutMillis: 10000,
+    idleTimeoutMillis: 30000,
+    max: 10,
+  };
+  console.log('DB: Using PGHOST individual variables:', { host: process.env.PGHOST, port: process.env.PGPORT, database: process.env.PGDATABASE, user: process.env.PGUSER });
 } else {
-  // Fallback to individual variables
+  // Fallback to DB_* variables
   poolConfig = {
     host: process.env.DB_HOST || 'db',
     port: process.env.DB_PORT || 5432,
@@ -33,13 +55,7 @@ if (process.env.DATABASE_URL) {
     idleTimeoutMillis: 30000,
     max: 10,
   };
-  console.log('DB config:', {
-    host: process.env.DB_HOST || 'db',
-    port: process.env.DB_PORT || 5432,
-    database: process.env.DB_NAME || 'baymard_tracker',
-    user: process.env.DB_USER || 'fs_tracker',
-    ssl: process.env.DB_SSL === 'true',
-  });
+  console.log('DB: Using DB_* fallback variables');
 }
 
 const pool = new Pool(poolConfig);
@@ -205,29 +221,32 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Diagnostic endpoint — shows DB config and tests connection (no password shown)
+// Diagnostic endpoint — shows ALL env vars and tests connection
 app.get('/api/diagnostic', async (req, res) => {
-  const dbUrl = process.env.DATABASE_URL || '';
-  // Show a masked version of DATABASE_URL so we can see its format
-  let dbUrlMasked = '(NOT SET)';
-  if (dbUrl) {
-    try {
-      const u = new URL(dbUrl);
-      dbUrlMasked = 'protocol=' + u.protocol + ' host=' + u.hostname + ' port=' + u.port + ' database=' + (u.pathname || '') + ' (valid URL)';
-    } catch (e) {
-      // Not a valid URL — show first 30 chars masked
-      dbUrlMasked = 'INVALID URL, first 30 chars: ' + dbUrl.substring(0, 30).replace(/:[^:@]*@/, ':****@');
+  // Dump all environment variables that look database-related (mask passwords)
+  const allEnv = {};
+  Object.keys(process.env).sort().forEach(key => {
+    const val = process.env[key];
+    if (key.match(/PG|DATABASE|DB_|POSTGRES|SQL/i)) {
+      // Mask passwords but show everything else
+      if (key.match(/PASSWORD|PASS|SECRET/i)) {
+        allEnv[key] = val ? '(set, ' + val.length + ' chars)' : '(empty)';
+      } else if (key.match(/URL/i) && val) {
+        // Show URL structure without password
+        try {
+          const u = new URL(val);
+          allEnv[key] = u.protocol + '****@' + u.hostname + ':' + u.port + u.pathname;
+        } catch (e) {
+          allEnv[key] = val.substring(0, 40) + (val.length > 40 ? '...' : '');
+        }
+      } else {
+        allEnv[key] = val || '(empty)';
+      }
     }
-  }
+  });
+  
   const config = {
-    DATABASE_URL: dbUrlMasked,
-    DATABASE_SSL: process.env.DATABASE_SSL || '(not set, default: ssl enabled)',
-    DB_HOST: process.env.DB_HOST || '(not set, default: db)',
-    DB_PORT: process.env.DB_PORT || '(not set, default: 5432)',
-    DB_NAME: process.env.DB_NAME || '(not set, default: baymard_tracker)',
-    DB_USER: process.env.DB_USER || '(not set, default: fs_tracker)',
-    DB_PASSWORD: process.env.DB_PASSWORD ? '(set, ' + process.env.DB_PASSWORD.length + ' chars)' : '(NOT SET)',
-    DB_SSL: process.env.DB_SSL || '(not set, default: false)',
+    allDbVars: allEnv,
     dbReady: _dbReady,
   };
   
