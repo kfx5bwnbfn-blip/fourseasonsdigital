@@ -223,30 +223,28 @@ app.get('/api/health', (req, res) => {
 
 // Diagnostic endpoint — shows ALL env vars and tests connection
 app.get('/api/diagnostic', async (req, res) => {
-  // Dump all environment variables that look database-related (mask passwords)
+  // Dump ALL environment variables (mask passwords/secrets)
   const allEnv = {};
   Object.keys(process.env).sort().forEach(key => {
     const val = process.env[key];
-    if (key.match(/PG|DATABASE|DB_|POSTGRES|SQL/i)) {
-      // Mask passwords but show everything else
-      if (key.match(/PASSWORD|PASS|SECRET/i)) {
-        allEnv[key] = val ? '(set, ' + val.length + ' chars)' : '(empty)';
-      } else if (key.match(/URL/i) && val) {
-        // Show URL structure without password
-        try {
-          const u = new URL(val);
-          allEnv[key] = u.protocol + '****@' + u.hostname + ':' + u.port + u.pathname;
-        } catch (e) {
-          allEnv[key] = val.substring(0, 40) + (val.length > 40 ? '...' : '');
-        }
-      } else {
-        allEnv[key] = val || '(empty)';
+    // Mask passwords and secrets
+    if (key.match(/PASSWORD|PASS|SECRET|TOKEN|KEY/i)) {
+      allEnv[key] = val ? '(set, ' + val.length + ' chars)' : '(empty)';
+    } else if (val && val.match(/^postgresql:\/\//i)) {
+      // Mask password in connection URLs
+      try {
+        const u = new URL(val);
+        allEnv[key] = u.protocol + '//' + u.username + ':****@' + u.hostname + ':' + u.port + u.pathname;
+      } catch (e) {
+        allEnv[key] = val.substring(0, 50) + '...';
       }
+    } else {
+      allEnv[key] = val || '(empty)';
     }
   });
   
   const config = {
-    allDbVars: allEnv,
+    allEnvVars: allEnv,
     dbReady: _dbReady,
   };
   
