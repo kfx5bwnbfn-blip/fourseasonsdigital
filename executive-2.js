@@ -166,36 +166,6 @@ async function init() {
   renderSummary();
   renderProgressBar();
   renderChannels();
-
-  // === Cross-tab sync: re-render when another tab changes a status ===
-  if (typeof onStatusChangeExternal === 'function') {
-    onStatusChangeExternal(async function(data) {
-      // Re-fetch all statuses from the API to ensure full accuracy
-      await fetchStatusOverrides();
-      renderSummary();
-      renderProgressBar();
-      renderChannels();
-    });
-  }
-
-  // Refresh from API when the page becomes visible again (e.g. switching tabs)
-  document.addEventListener('visibilitychange', async function() {
-    if (!document.hidden) {
-      await fetchStatusOverrides();
-      renderSummary();
-      renderProgressBar();
-      renderChannels();
-    }
-  });
-
-  // Periodic poll as a fallback (every 30 seconds)
-  setInterval(async function() {
-    if (document.hidden) return;
-    await fetchStatusOverrides();
-    renderSummary();
-    renderProgressBar();
-    renderChannels();
-  }, 30000);
 }
 
 init();
