@@ -169,7 +169,9 @@ async function init() {
 
   // === Cross-tab sync: re-render when another tab changes a status ===
   if (typeof onStatusChangeExternal === 'function') {
-    onStatusChangeExternal(function(data) {
+    onStatusChangeExternal(async function(data) {
+      // Re-fetch all statuses from the API to ensure full accuracy
+      await fetchStatusOverrides();
       renderSummary();
       renderProgressBar();
       renderChannels();

@@ -98,7 +98,7 @@ if (_broadcastChannel) {
 // Fetch all status overrides from the API on page load
 async function fetchStatusOverrides() {
   try {
-    const resp = await fetch('/api/statuses');
+    const resp = await fetch('/api/statuses?_t=' + Date.now());
     if (!resp.ok) throw new Error('Failed to fetch statuses');
     const data = await resp.json();
     // API returns an array of { item_key, status, updated_by, updated_at }
@@ -121,7 +121,7 @@ async function fetchStatusOverrides() {
 // Fetch history for a specific item
 async function fetchHistory(itemKey) {
   try {
-    const resp = await fetch('/api/history/' + encodeURIComponent(itemKey));
+    const resp = await fetch('/api/history/' + encodeURIComponent(itemKey) + '?_t=' + Date.now());
     if (!resp.ok) throw new Error('Failed to fetch history');
     const data = await resp.json();
     _statusHistory[itemKey] = data || [];
@@ -193,7 +193,7 @@ function initData(DATA) {
 
 // Fetch shared data from data.json
 async function fetchData() {
-  const resp = await fetch('/data.json');
+  const resp = await fetch('/data.json?_t=' + Date.now());
   if (!resp.ok) throw new Error('Failed to fetch data.json');
   const data = await resp.json();
   return initData(data);

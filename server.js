@@ -18,8 +18,24 @@ const pool = new Pool({
 
 // Middleware
 app.use(cors());
+
+// Disable caching for API and dynamic files so status changes always reflect
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api/') || req.path.endsWith('.json') || req.path.endsWith('.html')) {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+  }
+  next();
+});
+
 app.use(express.json());
-app.use(express.static(__dirname));
+
+// Serve static files from the root directory (flat structure)
+app.use(express.static(__dirname, {
+  etag: false,
+  lastModified: false,
+}));
 
 // === API Routes ===
 
@@ -129,27 +145,6 @@ app.get('/api/history', async (req, res) => {
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
-});
-
-// Serve HTML pages
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-app.get('/roadmap-tracker', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'roadmap-tracker.html'));
-});
-
-// Catch-all for direct HTML file access
-app.get('/:page', (req, res, next) => {
-  const page = req.params.page;
-  if (page.endsWith('.html')) {
-    res.sendFile(path.join(__dirname, 'public', page), (err) => {
-      if (err) next();
-    });
-  } else {
-    next();
-  }
 });
 
 // Initialize database on startup

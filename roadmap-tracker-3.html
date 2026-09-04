@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Four Seasons Digital — Executive Summary</title>
-<style>
+<title>Four Seasons Digital — 2026 UX Roadmap Tracker</title>
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* === Four Seasons Brand Typography === */
 @font-face {
@@ -57,47 +57,18 @@
   --shadow-lg: 0 4px 16px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-
-:root {
-  --text-primary: #000000;
-  --text-secondary: #555;
-  --text-muted: #888;
-  --bg-page: #FFFCF9;
-  --bg-card: #FFFFFF;
-  --bg-subtle: #F5F2EE;
-  --accent: #3D441E;
-  --accent-dark: #2A2F15;
-  --accent-light: #CBC4BC;
-  --warm-stone: #CBC4BC;
-  --white-sand: #FFFCF9;
-  --cashmere: #D4B59E;
-  --earthen: #B6533E;
-  --border: #CBC4BC;
-  --border-strong: #B5ACA0;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-lg: 0 4px 16px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
-  --done: #4CAF50;
-  --done-light: #E8F5E9;
-  --pending: #B0B0B0;
-  --pending-light: #F0F0F0;
-  --in-progress: #2196F3;
-  --in-progress-light: #E3F2FD;
-}
-
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-family: 'Saol Display', Georgia, serif; font-weight: 300;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--text-primary);
   background: var(--bg-page);
 }
 
-/* === Header === */
 header {
-  background: #3D441E;
+  background: #3D441E;  /* Ever Green */
   color: #fff;
   padding: 2.5rem 2rem 2rem;
   position: relative;
@@ -108,7 +79,7 @@ header::after {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 3px;
-  background: #CBC4BC;
+  background: #CBC4BC;  /* Warm Stone */
 }
 
 /* === Page Navigation Tabs === */
@@ -155,9 +126,9 @@ header::after {
   gap: 1rem;
 }
 .header-title h1 {
-  font-family: 'Saol Display', Georgia, serif;
-  font-size: 2.2rem;
-  font-weight: 300;
+  font-family: 'Saol Display', Georgia, serif; font-weight: 300;
+  font-size: 2rem;
+  font-weight: 400;
   margin: 0 0 0.3rem;
   letter-spacing: 0.5px;
 }
@@ -165,82 +136,87 @@ header::after {
   font-size: 0.95rem;
   color: rgba(255,255,255,0.7);
   font-style: italic;
-  font-family: 'Saol Display', Georgia, serif;
-  font-weight: 300;
 }
 .header-meta {
   text-align: right;
   font-size: 0.85rem;
   color: rgba(255,255,255,0.6);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .header-meta .label { display: block; text-transform: uppercase; letter-spacing: 1px; font-size: 0.7rem; }
-.header-meta .value { color: #CBC4BC; font-size: 1.1rem; font-weight: 600; }
+.header-meta .value { color: var(--gold); font-size: 1.1rem; font-weight: 600; }
 
-/* === Container === */
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* === Summary KPIs === */
-.summary-row {
+.kpi-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
 }
-.summary-card {
+.kpi-card {
   background: var(--bg-card);
-  border-radius: 10px;
-  padding: 1.5rem 1.8rem;
+  border-radius: 8px;
+  padding: 1.3rem 1.5rem;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
   border-top: 3px solid var(--accent);
 }
-.summary-card.green { border-top-color: var(--done); }
-.summary-card.blue { border-top-color: var(--in-progress); }
-.summary-card.grey { border-top-color: var(--pending); }
-.summary-card .s-label {
+.kpi-card.gold { border-top-color: var(--gold); }
+.kpi-card.success { border-top-color: var(--success); }
+.kpi-card.info { border-top-color: var(--info); }
+.kpi-card.warning { border-top-color: var(--warning); }
+.kpi-card .kpi-label {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 1.2px;
   color: var(--text-muted);
   margin-bottom: 0.4rem;
 }
-.summary-card .s-value {
-  font-family: 'Saol Display', Georgia, serif;
-  font-size: 2.4rem;
-  font-weight: 300;
+.kpi-card .kpi-value {
+  font-family: 'Saol Display', Georgia, serif; font-weight: 300;
+  font-size: 2.2rem;
+  font-weight: 400;
   line-height: 1;
   color: var(--text-primary);
 }
-.summary-card .s-sub {
+.kpi-card .kpi-sub {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
   color: var(--text-secondary);
   margin-top: 0.3rem;
 }
 
-/* === Overall Progress Bar === */
-.overall-progress {
+.section-title {
+  font-family: 'Saol Display', Georgia, serif; font-weight: 300;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-title .icon { color: var(--accent); }
+
+.progress-overview {
   background: var(--bg-card);
-  border-radius: 10px;
-  padding: 1.5rem 1.8rem;
+  border-radius: 8px;
+  padding: 1.5rem;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
   margin-bottom: 2rem;
 }
-.overall-progress-title {
-  font-family: 'Saol Display', Georgia, serif;
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0 0 1rem;
-  color: var(--accent);
-}
 .progress-bar-container {
   display: flex;
-  height: 36px;
-  border-radius: 8px;
+  height: 32px;
+  border-radius: 6px;
   overflow: hidden;
   margin-bottom: 0.8rem;
   border: 1px solid var(--border);
@@ -249,10 +225,12 @@ header::after {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   color: #fff;
   transition: flex 0.3s;
+  cursor: default;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -260,155 +238,560 @@ header::after {
   display: flex;
   flex-wrap: wrap;
   gap: 1.2rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 0.82rem;
 }
 .legend-item { display: flex; align-items: center; gap: 0.4rem; }
 .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
 
-/* === Channel Sections === */
-.channel-section {
-  margin-bottom: 2.5rem;
-}
-.channel-header {
+/* === Big Channel Tabs === */
+.channel-tabs {
   display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 2px solid var(--accent);
-}
-.channel-header h2 {
-  font-family: 'Saol Display', Georgia, serif;
-  font-size: 1.6rem;
-  font-weight: 300;
-  margin: 0;
-  color: var(--accent);
-}
-.channel-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  background: var(--accent);
-  color: #fff;
-  padding: 3px 12px;
-  border-radius: 12px;
-}
-.channel-stats {
-  margin-left: auto;
-  display: flex;
-  gap: 1.5rem;
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-}
-.channel-stat { display: flex; align-items: center; gap: 0.3rem; }
-.channel-stat .num { font-weight: 700; color: var(--text-primary); font-size: 1rem; }
-
-/* === Bucket Columns === */
-.bucket-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-}
-.bucket-col {
-  background: var(--bg-card);
+  gap: 0;
+  margin-bottom: 1.5rem;
   border-radius: 10px;
+  overflow: hidden;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
-  overflow: hidden;
 }
-.bucket-col-header {
-  padding: 0.8rem 1rem;
-  background: var(--bg-subtle);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.bucket-col-header h3 {
-  font-family: 'Saol Display', Georgia, serif;
+.channel-tab {
+  flex: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.05rem;
-  font-weight: 300;
-  margin: 0;
-  color: var(--accent);
-}
-.bucket-count {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--text-muted);
+  font-weight: 600;
+  padding: 1rem 1.5rem;
   background: var(--bg-card);
-  padding: 2px 8px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
-.bucket-items {
-  padding: 0.5rem;
-}
-.bucket-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  padding: 0.6rem 0.5rem;
-  border-radius: 6px;
-  transition: background 0.15s;
-}
-.bucket-item:hover { background: var(--bg-subtle); }
-.item-status-icon {
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+  border: none;
+  border-right: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  margin-top: 1px;
+  gap: 0.6rem;
+  position: relative;
 }
-.item-status-icon.done {
-  background: var(--done);
+.channel-tab:last-child { border-right: none; }
+.channel-tab:hover { background: var(--gold-light); color: var(--accent-dark); }
+.channel-tab.active {
+  background: var(--accent);
   color: #fff;
 }
-.item-status-icon.in-progress {
-  background: var(--in-progress);
+.channel-tab.active .tab-count {
+  background: rgba(255,255,255,0.25);
   color: #fff;
 }
-.item-status-icon.pending {
-  background: var(--pending);
-  color: #fff;
-}
-.item-content {
-  flex: 1;
-  min-width: 0;
-}
-.item-guideline {
-  font-size: 0.82rem;
-  line-height: 1.4;
-  color: var(--text-primary);
-}
-.item-guideline .gid {
+.tab-count {
+  font-size: 0.78rem;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  padding: 2px 10px;
+  border-radius: 10px;
   font-weight: 700;
-  color: var(--accent);
-}
-.item-meta {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  margin-top: 0.2rem;
+  min-width: 28px;
+  text-align: center;
 }
 
-/* === Footer === */
+/* === View Tabs === */
+.view-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+  border-bottom: 2px solid var(--border-strong);
+}
+.view-tab {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  margin-bottom: -2px;
+}
+.view-tab:hover { color: var(--accent-dark); }
+.view-tab.active { color: var(--accent-dark); border-bottom-color: var(--gold); font-weight: 600; }
+.view-tab-content { display: none; }
+.view-tab-content.active { display: block; }
+
+/* === Filters === */
+.filters {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+.filter-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.filter-group label {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+.filter-group select, .filter-group input {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.filter-group select:focus, .filter-group input:focus { border-color: var(--accent); }
+.filter-group input { min-width: 200px; }
+.filter-actions { display: flex; gap: 0.6rem; align-items: flex-end; }
+
+/* === Theme Pillbox === */
+.theme-pills-wrap { display: flex; flex-direction: column; gap: 0.3rem; }
+.theme-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  max-width: 100%;
+}
+.theme-pill {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  background: #fff;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.theme-pill:hover { border-color: var(--accent); color: var(--accent-dark); background: var(--gold-light); }
+.theme-pill.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.theme-pill .pill-count {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(0,0,0,0.08);
+  padding: 0 6px;
+  border-radius: 8px;
+  min-width: 18px;
+  text-align: center;
+}
+.theme-pill.active .pill-count { background: rgba(255,255,255,0.25); }
+
+/* === Status Editor === */
+.status-editor-wrap {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 2px dashed var(--border-strong);
+}
+.status-editor-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+.status-editor-header h4 {
+  font-family: 'Saol Display', Georgia, serif; font-weight: 300;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 0;
+  color: var(--accent-dark);
+}
+.status-editor-btn {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.status-editor-btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.status-current {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-left: 0.5rem;
+}
+.status-form {
+  display: none;
+  margin-top: 0.8rem;
+  padding: 1rem;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.status-form.show { display: block; }
+.status-form-row { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.8rem; }
+.status-form-row label {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+.status-form-row select, .status-form-row input {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.status-form-row select:focus, .status-form-row input:focus { border-color: var(--accent); }
+.status-form-row input.required-empty { border-color: var(--danger); background: #FFF5F5; }
+.status-form-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+.status-form-actions .btn-save {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--success);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.status-form-actions .btn-save:hover { background: #246B40; }
+.status-form-actions .btn-cancel {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.status-form-actions .btn-cancel:hover { border-color: var(--danger); color: var(--danger); }
+.status-form-error {
+  display: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--danger);
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+.status-form-error.show { display: block; }
+
+/* === Change History === */
+.change-history {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+.change-history-title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.change-history-list { list-style: none; padding: 0; margin: 0; }
+.change-history-item {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.change-history-item:last-child { border-bottom: none; }
+.change-history-item .ch-from { color: var(--text-muted); }
+.change-history-item .ch-arrow { color: var(--text-muted); }
+.change-history-item .ch-to { font-weight: 600; }
+.change-history-item .ch-by { color: var(--accent-dark); font-weight: 600; }
+.change-history-item .ch-date { color: var(--text-muted); font-size: 0.75rem; }
+.change-history-empty {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.btn {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent-dark); }
+
+.sort-indicator {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* === Table === */
+.table-wrapper {
+  background: var(--bg-card);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+}
+thead th {
+  background: var(--bg-subtle);
+  padding: 0.8rem 0.8rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--border-strong);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+tbody tr:hover { background: var(--gold-light); }
+tbody tr.expanded { background: var(--bg-subtle); }
+td { padding: 0.65rem 0.8rem; vertical-align: top; }
+td.priority-cell { text-align: center; font-weight: 700; font-size: 1rem; }
+td.impact-cell { text-align: center; }
+td.guideline-id-cell { text-align: center; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: 0.82rem; }
+.impact-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.73rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-identified { background: var(--bg-subtle); color: var(--text-muted); }
+.badge-ticket-created { background: #E3F2FD; color: #1565C0; }
+.badge-in-planning { background: var(--info-light); color: var(--info); }
+.badge-in-design { background: #F3E5F5; color: #7B1FA2; }
+.badge-in-development { background: var(--warning-light); color: var(--warning); }
+.badge-in-qa { background: #E0F2F1; color: #00695C; }
+.badge-in-uat { background: #E8EAF6; color: #3949AB; }
+.badge-in-production { background: var(--success-light); color: var(--success); }
+
+.ch-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.ch-web { background: #000000; color: #FFFFFF; }
+.ch-app { background: var(--accent); color: #fff; }
+
+.effort-badge {
+  display: inline-block;
+  width: 28px;
+  text-align: center;
+  padding: 2px 0;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.effort-S { background: var(--success-light); color: var(--success); }
+.effort-M { background: var(--warning-light); color: var(--warning); }
+.effort-L { background: #FCE8E8; color: var(--danger); }
+.effort-XL { background: var(--danger); color: #fff; }
+
+.prio-9 { color: var(--danger); }
+.prio-8 { color: #C44A1A; }
+.prio-7 { color: var(--warning); }
+.prio-6 { color: var(--info); }
+.prio-5, .prio-4 { color: var(--accent-dark); }
+.prio-3, .prio-2, .prio-1 { color: var(--text-muted); }
+
+tr.detail-row { display: none; }
+tr.detail-row.show { display: table-row; }
+tr.detail-row td {
+  background: #fafafa;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 2px solid var(--border-strong);
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.88rem;
+}
+.detail-section h4 {
+  font-family: 'Saol Display', Georgia, serif; font-weight: 300;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 0 0 0.4rem;
+  color: var(--accent-dark);
+}
+.detail-section p { margin: 0 0 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+.detail-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.detail-meta-item { font-size: 0.82rem; }
+.detail-meta-item .lbl { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; }
+.detail-meta-item .val { color: var(--text-primary); font-weight: 600; }
+.ticket-link { color: var(--info); text-decoration: none; font-weight: 600; }
+.platform-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.platform-tag { font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; background: var(--bg-subtle); color: var(--text-secondary); }
+
+.theme-group { margin-bottom: 2rem; }
+.theme-header {
+  font-family: 'Saol Display', Georgia, serif; font-weight: 300;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--accent-dark);
+  margin-bottom: 0.6rem;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.theme-header .count {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.78rem;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.timeline {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.timeline-q { margin-bottom: 1.5rem; }
+.timeline-q-header {
+  font-family: 'Saol Display', Georgia, serif; font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--accent-dark);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.timeline-q-header .q-badge {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  background: var(--gold);
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.timeline-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 0.8rem;
+}
+.timeline-item {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  background: #fff;
+  transition: box-shadow 0.2s;
+}
+.timeline-item:hover { box-shadow: var(--shadow-lg); }
+.timeline-item .ti-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+.timeline-item .ti-title { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.3; }
+.timeline-item .ti-meta { font-size: 0.75rem; color: var(--text-muted); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin-top: 0.3rem; }
+
 footer {
   text-align: center;
   padding: 2rem;
-  font-size: 0.78rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
   color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
 }
-footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
-footer a:hover { text-decoration: underline; }
 
-/* === Responsive === */
 @media (max-width: 768px) {
+  .container { padding: 1rem; }
   .header-inner { flex-direction: column; align-items: flex-start; }
   .header-meta { text-align: left; }
-  .bucket-grid { grid-template-columns: 1fr; }
-  .channel-stats { flex-direction: column; gap: 0.3rem; }
+  .detail-grid { grid-template-columns: 1fr; }
+  table { font-size: 0.78rem; }
+  td, th { padding: 0.4rem 0.5rem; }
+  .hide-mobile { display: none; }
+  .channel-tab { font-size: 0.9rem; padding: 0.7rem 1rem; }
+}
+
+@media print {
+  body { background: #fff; }
+  .filters, .filter-actions, .btn, .channel-tabs { display: none; }
+  tr.detail-row { display: table-row !important; }
+  .table-wrapper { box-shadow: none; border: 1px solid #ddd; }
+  header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
 </head>
@@ -417,66 +800,128 @@ footer a:hover { text-decoration: underline; }
 <header>
   <div class="header-inner">
     <div class="header-title">
-      <h1>Baymard UX Audit — Executive Summary</h1>
-      <div class="subtitle">Four Seasons Digital Ecosystem | End of 2026 Roadmap</div>
+      <h1>Digital UX Roadmap — 2026</h1>
+      <div class="subtitle">Baymard Audit Findings &middot; Progress Tracker &middot; Executive Readout</div>
     </div>
     <div class="header-meta">
       <span class="label">Last Updated</span>
-      <span class="value" id="lastUpdated">—</span>
+      <span class="value">September 2026</span>
     </div>
   </div>
 </header>
 
 <nav class="page-nav">
   <div class="page-nav-inner">
-    <a href="index.html" class="page-nav-tab active">Executive Summary</a>
-    <a href="roadmap-tracker.html" class="page-nav-tab">Progress Tracker</a>
+    <a href="index.html" class="page-nav-tab">Executive Summary</a>
+    <a href="roadmap-tracker.html" class="page-nav-tab active">Progress Tracker</a>
   </div>
 </nav>
 
 <div class="container">
+  <div class="kpi-row" id="kpiRow"></div>
 
-  <!-- Summary KPIs -->
-  <div class="summary-row" id="summaryRow"></div>
-
-  <!-- Overall Progress Bar -->
-  <div class="overall-progress">
-    <h3 class="overall-progress-title">Overall Progress</h3>
+  <div class="progress-overview">
+    <div class="section-title" style="margin-top:0;"><i data-lucide="bar-chart-3" class="icon" style="width:22px;height:22px;"></i> Overall Progress</div>
     <div class="progress-bar-container" id="progressBar"></div>
     <div class="progress-legend" id="progressLegend"></div>
   </div>
 
-  <!-- Channel Sections -->
-  <div id="channelSections"></div>
+  <!-- Big Channel Tabs -->
+  <div class="channel-tabs">
+    <button class="channel-tab active" onclick="setChannel('')"><i data-lucide="layers" style="width:20px;height:20px;"></i> All <span class="tab-count" id="count-all">0</span></button>
+    <button class="channel-tab" onclick="setChannel('WEB')"><i data-lucide="globe" style="width:20px;height:20px;"></i> Website <span class="tab-count" id="count-WEB">0</span></button>
+    <button class="channel-tab" onclick="setChannel('APP')"><i data-lucide="smartphone" style="width:20px;height:20px;"></i> App <span class="tab-count" id="count-APP">0</span></button>
+  </div>
 
+  <!-- View Tabs -->
+  <div class="view-tabs">
+    <button class="view-tab active" onclick="switchViewTab(event,'roadmap')"><i data-lucide="list" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i>Roadmap Table</button>
+    <button class="view-tab" onclick="switchViewTab(event,'timeline')"><i data-lucide="calendar" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i>Timeline View</button>
+    <button class="view-tab" onclick="switchViewTab(event,'theme')"><i data-lucide="folder" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i>By Theme</button>
+  </div>
+
+  <div class="view-tab-content active" id="vtab-roadmap">
+    <div class="filters">
+      <div class="theme-pills-wrap" style="flex-basis:100%;">
+        <label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);">Theme</label>
+        <div class="theme-pills" id="themePills"></div>
+      </div>
+      <div class="filter-group">
+        <label>Status</label>
+        <select id="filterStatus" onchange="applyFilters()"><option value="">All Statuses</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Owner</label>
+        <select id="filterOwner" onchange="applyFilters()"><option value="">All Owners</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="filterSearch" placeholder="Search findings..." oninput="applyFilters()">
+      </div>
+      <div class="filter-actions">
+        <button class="btn" onclick="resetFilters()"><i data-lucide="rotate-ccw" style="width:14px;height:14px;"></i> Reset</button>
+      </div>
+      <div class="sort-indicator"><i data-lucide="arrow-down-wide-narrow" style="width:14px;height:14px;"></i> Sorted by Impact (high to low)</div>
+    </div>
+    <div class="table-wrapper">
+      <table id="roadmapTable">
+        <thead>
+          <tr>
+            <th style="width:36px;">P</th>
+            <th style="width:60px;">Channel</th>
+            <th style="width:110px;">Bucket</th>
+            <th>Theme</th>
+            <th>Page / Element</th>
+            <th style="width:70px;">Guideline ID</th>
+            <th>Finding (Baymard Guideline)</th>
+            <th class="hide-mobile" style="width:90px;">Status</th>
+            <th style="width:55px;">Impact</th>
+            <th style="width:50px;">Effort</th>
+            <th class="hide-mobile" style="width:90px;">Owner</th>
+            <th class="hide-mobile" style="width:90px;">Target</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="view-tab-content" id="vtab-timeline">
+    <div class="timeline" id="timelineView"></div>
+  </div>
+
+  <div class="view-tab-content" id="vtab-theme">
+    <div id="themeView"></div>
+  </div>
 </div>
 
 <footer>
-  <p>Four Seasons Digital — Baymard UX Audit Tracker | <a href="roadmap-tracker.html">View Full Roadmap Tracker</a></p>
+  Four Seasons Digital &middot; UX Audit Roadmap Tracker &middot; Derived from Baymard audit findings &middot; Source: "Readout for Brian (End of 2026)", Action Plan tabs &amp; Product Backlog
 </footer>
 
 <script type="application/json" id="dataPayload">[{"channel": "WEB", "theme": "Navigation & IA", "page": "CAW - mobile", "guideline": "#1866 Make the \u201cbooking\u201d search feature the primary content on the homepage", "impact": 2.6, "effort": "M", "priority": 9, "id": "1866", "suggestion": "Make the \u201cbooking\u201d search feature the primary content on the homepage", "bucket": "Redesign", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "Dave to double check with Brian", "dependencies": "", "owner": "Product", "whatToDo": "Expose CAW on mobile", "currentFS": "On mobile, destination search is prioritized over a prominent HP booking feature. \"check rates\" is a sticky button taht is styled similarly to the rest of th homepage (black), which further increases the risk that it will be missed by a subgroup of users", "recommendation": "Expose CAW wihtin the fold.", "ritz": "Gap", "aman": "Gap", "top10": "Yes", "platforms": ["Mobile Web"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "1866"}, {"channel": "APP", "theme": "Booking (incl. Pricing & Cancellation)", "page": "PDP", "guideline": "#2246 Provide tour prices in multiple currencies", "impact": 2.6, "effort": "M", "priority": 9, "id": "2246", "suggestion": "Provide tour prices in multiple currencies", "bucket": "2027 Roadmap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Update app to match web PDP redesign", "dependencies": "", "owner": "Product", "whatToDo": "Have currency selector for Experiences", "currentFS": "", "recommendation": "", "ritz": "", "aman": "", "top10": "Yes", "platforms": ["App"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "2246"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Check out flow - Complete booking", "guideline": "#722 Use \u201cAdaptive Error Messages\u201d", "impact": 2.8, "effort": "S", "priority": 8, "id": "722", "suggestion": "Use \u201cAdaptive Error Messages\u201d", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Adaptive error messages for specific form fields (Phone / Email / Zipcode..etc)", "currentFS": "Filling out incomplete information in the telephone field, the error message reads \"please enter a valid telephone number\" Furthermore, noly a generic credit card error message is provided when entering incomplete or incorrect data", "recommendation": "Use adaptive error messages that specify the exact subissue that caused the user's specific input to fail validation, and outline what a user must do to correct it.", "ritz": "Gap", "aman": "Gap", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Content"], "epic": "Booking Engine", "jira": "", "backlogStatus": "", "story": "Input Errors", "description": "", "guidelineId": "722"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Check out flow - Complete booking", "guideline": "#719 Provide an \u201cError Summary\u201d for multiple validation errors", "impact": 2.8, "effort": "M", "priority": 8, "id": "719", "suggestion": "Provide an \u201cError Summary\u201d for multiple validation errors", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Optimize UX for multi validation errors", "currentFS": "WHen multiple validation errors occur, one of the erraneous fields falls out of the viewport when autoscrolled to one of them, making it difficult for users to locate", "recommendation": "With multiple errors, take users to the top of the page and inject an \"error summary\" outlining the multiple errors that have been detected and what they ar e", "ritz": "Gap", "aman": "Gap", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design"], "epic": "Booking Engine", "jira": "", "backlogStatus": "", "story": "Input Errors", "description": "", "guidelineId": "719"}, {"channel": "WEB", "theme": "Booking (incl. Pricing & Cancellation)", "page": "Booking flow", "guideline": "#1490 Always feature essential product details and the product thumbnail in the \u201cAdded to Cart\u201d overlay", "impact": 1.8, "effort": "M", "priority": 8, "id": "1490", "suggestion": "Always feature essential product details and the product thumbnail in the \u201cAdded to Cart\u201d overlay", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Feature more information with larger thumbnails when an item is added to cart", "currentFS": "Key information regarding the added item is not clearly indicated in the overlay, including the price and duratino of stay.", "recommendation": "", "ritz": "N/A", "aman": "N/A", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design"], "epic": "Shopping Cart", "jira": "", "backlogStatus": "Needs Design", "story": "As a Guest, I want to see key info on the product I just added to Cart", "description": "Add product info on the added to cart popup", "guidelineId": "1490"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Survey pop-up", "guideline": "#788 Avoid non-user-initiated feedback requests", "impact": 1.8, "effort": "M", "priority": 8, "id": "788", "suggestion": "Avoid non-user-initiated feedback requests", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "Solved by shutting down Qualtrics", "owner": "Product", "whatToDo": "Reconsider how \"survey\" is treated", "currentFS": "The site requests feedback during the browsing experience", "recommendation": "Don't interrupt users with site-initiated requests for feedback. If truly needed, display statis requests for feedback in inconspicuous areas of the site, incentivize users to provide feedback, auto-remove feedback requests after a responce goal has been reached and consider only including on the desktop site.", "ritz": "Addressed", "aman": "Addressed", "top10": "", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Design"], "epic": "Qualtrics", "jira": "", "backlogStatus": "Ready for Dev", "story": "As FS, I want to turn off all Qualtrics survey", "description": "No more Qualtrics", "guidelineId": "788"}, {"channel": "WEB", "theme": "Booking (incl. Pricing & Cancellation)", "page": "Booking flow", "guideline": "#1864 Improve the prominence of the cancellation policy on the room results page", "impact": 3.4, "effort": "M", "priority": 8, "id": "1864", "suggestion": "Improve the prominence of the cancellation policy on the room results page", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "Product work is complete - waiting on RMD workstream with properties to update CXL policies", "dependencies": "Operations - Changes to cancellation pending global cancellation policy", "owner": "Revenue Management", "whatToDo": "Reconsider cancellation policy placement on mobile", "currentFS": "On mobile, cancellation details are only avail on offer listing page. Additionaly link naming does not make it clear that users will find the cancellation policy therein, and there is no link to the cancellation poliy in the footer", "recommendation": "Ensure the access to the cancellation policy is sufficiently prominen on the select a room/rate page. Also provide prominent access to the cancellation policy in the footer", "ritz": "Gap", "aman": "Gap", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web"], "teams": [], "epic": "Booking Engine", "jira": "", "backlogStatus": "Needs Design", "story": "As a Guest, I want to see the cancellation policy for each room and offer on the search results page", "description": "More cancellation policy", "guidelineId": "1864"}, {"channel": "APP", "theme": "Usability Enhancements", "page": "Check out flow - Complete booking", "guideline": "#722 Use \u201cAdaptive Error Messages\u201d", "impact": 2.8, "effort": "S", "priority": 8, "id": "722", "suggestion": "Use \u201cAdaptive Error Messages\u201d", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Maddie to complete", "dependencies": "", "owner": "Product", "whatToDo": "Adaptive error messages for specific form fields (Phone / Email / Zipcode..etc)", "currentFS": "", "recommendation": "", "ritz": "Gap", "aman": "Gap", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Content"], "epic": "Booking Engine", "jira": "", "backlogStatus": "", "story": "Input Errors", "description": "", "guidelineId": "722"}, {"channel": "APP", "theme": "Usability Enhancements", "page": "Survey pop-up", "guideline": "#788 Avoid non-user-initiated feedback requests", "impact": 1.8, "effort": "M", "priority": 8, "id": "788", "suggestion": "Avoid non-user-initiated feedback requests", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Via shutting down Qualtrics", "dependencies": "", "owner": "Product", "whatToDo": "Reconsider how \"survey\" is treated", "currentFS": "", "recommendation": "", "ritz": "Addressed", "aman": "Addressed", "top10": "", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Design"], "epic": "Qualtrics", "jira": "", "backlogStatus": "Ready for Dev", "story": "As FS, I want to turn off all Qualtrics survey", "description": "No more Qualtrics", "guidelineId": "788"}, {"channel": "APP", "theme": "Booking (incl. Pricing & Cancellation)", "page": "Check out flow - Complete booking", "guideline": "#721 Check credit card validity as users submit the payment step", "impact": 2, "effort": "L", "priority": 8, "id": "721", "suggestion": "Check credit card validity as users submit the payment step", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "TBD", "dependencies": "", "owner": "Product", "whatToDo": "Validate credit card at checkout", "currentFS": "", "recommendation": "", "ritz": "", "aman": "", "top10": "", "platforms": ["App"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "721"}, {"channel": "APP", "theme": "Booking (incl. Pricing & Cancellation)", "page": "During stay - Order Amenities", "guideline": "#732 Provide full order cost, or an estimate, in the cart", "impact": 2.8, "effort": "M", "priority": 8, "id": "732", "suggestion": "Provide full order cost, or an estimate, in the cart", "bucket": "2027 Roadmap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Allow guests to purchase within stay journey", "currentFS": "", "recommendation": "", "ritz": "", "aman": "", "top10": "Yes", "platforms": ["App"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "732"}, {"channel": "WEB", "theme": "Content & Merchandising", "page": "PDP", "guideline": "#2219 Always provide a basic itinerary for tours comprising numerous stops or activities", "impact": 2.6, "effort": "XL", "priority": 7, "id": "2219", "suggestion": "Always provide a basic itinerary for tours comprising numerous stops or activities", "bucket": "Redesign, Addressed", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "Content guideline 2026 Sept release, 2027 to follow up on how we are doing", "dependencies": "Properties - Responsible for room & tour content", "owner": "Content", "whatToDo": "Have option to display itineary in PDP", "currentFS": "\"Tour details\" pages are missing an itinerary", "recommendation": "Always provide a detailed itinerary that includes breakdown of the schedule or sample schedule for sightseeing tours and experiences comprising numerous stops or activities", "ritz": "Addressed", "aman": "Gap", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design", "Content"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "2219"}, {"channel": "WEB", "theme": "Content & Merchandising", "page": "PDP, ADP", "guideline": "#810 Provide alternative cross-sells", "impact": 1.8, "effort": "M", "priority": 7, "id": "810", "suggestion": "Provide alternative cross-sells", "bucket": "Redesign, Addressed", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "n/a", "whatToDo": "Provide alternatives on PDP / ADP", "currentFS": "When viewing a tour and a room, there are currently no alternatives suggested", "recommendation": "Provide at least one separate cross-sell section that suggests only alternative products. Make sure alternative cross-sells are relevant, the cross-sell section title is specific, and sufficient information is provided for each alternative item. Include a link to the parent category for alternative cross-sells and place the cross-sell section at the bottom of the product page to avoide users interpreting it as the end of the page", "ritz": "Addressed", "aman": "Addressed", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design", "Content"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "810"}, {"channel": "WEB", "theme": "Content & Merchandising", "page": "PDP, ADP", "guideline": "#759 Use video to showcase products", "impact": 1.8, "effort": "M", "priority": 7, "id": "759", "suggestion": "Use video to showcase products", "bucket": "Redesign, Addressed", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "Need content / assets from properties over time", "dependencies": "Properties - Responsible for room & tour content", "owner": "n/a", "whatToDo": "Address in content guideline", "currentFS": "Videos result in an error on the accom. page and are absent from the tour page", "recommendation": "To demonstrate product features and entice users to purchase, provide product videos for at a min. the top selling products. Product videos should showcase important product features, inspire users, and provide informatino about the product's scale", "ritz": "Gap", "aman": "Addressed", "top10": "", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Content"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "759"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Check out flow - Complete booking", "guideline": "#1100 Invoke appropriate keyboard layouts", "impact": 3, "effort": "S", "priority": 7, "id": "1100", "suggestion": "Invoke appropriate keyboard layouts", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Invoke Appropriate keyboard layout for email / tel / numerics", "currentFS": "Incorrect keyboard layout is invoked for the credit card and email fields", "recommendation": "Invoke the keyboard layout appropriate for te type of data being entered", "ritz": "Gap", "aman": "Gap", "top10": "Yes", "platforms": ["Mobile Web", "App"], "teams": ["Product"], "epic": "Nav", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want to see a number keyboard when inputing a number", "description": "Optimize the keyboard", "guidelineId": "1100"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Check out flow - Complete booking", "guideline": "#731 Explain why seemingly unnecessary personal data is required", "impact": 1.8, "effort": "S", "priority": 7, "id": "731", "suggestion": "Explain why seemingly unnecessary personal data is required", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Re-define mandatory fields for check out", "currentFS": "", "recommendation": "", "ritz": "Gap", "aman": "Gap", "top10": "", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product"], "epic": "Booking Engine", "jira": "", "backlogStatus": "Needs Design", "story": "As a Guest, when I am asked to provide PII, I want a brief explanation as to why and what will my info be used for", "description": "Increase guest confidence in providing PII", "guidelineId": "731"}, {"channel": "WEB", "theme": "Content & Merchandising", "page": "Product card", "guideline": "#2237 Include price and duration in tour list items", "impact": 3.8, "effort": "M", "priority": 7, "id": "2237", "suggestion": "Include price and duration in tour list items", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "Properties - Responsible for room & tour content", "owner": "Product", "whatToDo": "Update product card to have more information upfront", "currentFS": "Tour list items are missing the duration", "recommendation": "Each tour list item should include price, duration and a representative thumbnail", "ritz": "Gap", "aman": "Gap", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design"], "epic": "Shopping Cart", "jira": "", "backlogStatus": "Needs Design", "story": "As a Guest, I want to see the duration in the product card on the Things to Do page", "description": "Add duration on product card", "guidelineId": "2237"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "CAW - desktop", "guideline": "#560 Consider using an autocomplete field for the \u201cdestination\u201d input in the the stay in the room results", "impact": 2, "effort": "L", "priority": 7, "id": "560", "suggestion": "Consider using an autocomplete field for the \u201cdestination\u201d input in the the stay in the room results", "bucket": "NLS", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Introduce autocomplete fields", "currentFS": "Only 1:1 match typing works on Desktop CAW destination field suggesetion", "recommendation": "Use auto-complete field (ei. find a destination\" search bar)", "ritz": "N/A", "aman": "N/A", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "560"}, {"channel": "APP", "theme": "Usability Enhancements", "page": "Booking flow", "guideline": "#1872 Always persist the travel dates between the hotel\u2019s main site and its individual property sites", "impact": 3, "effort": "L", "priority": 7, "id": "1872", "suggestion": "Always persist the travel dates between the hotel\u2019s main site and its individual property sites", "bucket": "2027 Roadmap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Add resume search to the PLP - stay page redesign", "dependencies": "", "owner": "Product", "whatToDo": "Persist selected dates in calendar", "currentFS": "", "recommendation": "", "ritz": "", "aman": "", "top10": "Yes", "platforms": ["App"], "teams": ["Product"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "1872"}, {"channel": "APP", "theme": "Usability Enhancements", "page": "Check out flow - Complete booking", "guideline": "#1100 Invoke appropriate keyboard layouts", "impact": 3, "effort": "S", "priority": 7, "id": "1100", "suggestion": "Invoke appropriate keyboard layouts", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Maddie to complete", "dependencies": "", "owner": "Product", "whatToDo": "Invoke Appropriate keyboard layout for email / tel / numerics", "currentFS": "", "recommendation": "", "ritz": "Gap", "aman": "Gap", "top10": "Yes", "platforms": ["Mobile Web", "App"], "teams": ["Product"], "epic": "Nav", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want to see a number keyboard when inputing a number", "description": "Optimize the keyboard", "guidelineId": "1100"}, {"channel": "APP", "theme": "Usability Enhancements", "page": "Check out flow - Complete booking", "guideline": "#731 Explain why seemingly unnecessary personal data is required", "impact": 1.8, "effort": "S", "priority": 7, "id": "731", "suggestion": "Explain why seemingly unnecessary personal data is required", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "TBD", "dependencies": "", "owner": "Product", "whatToDo": "Re-define mandatory fields for check out", "currentFS": "", "recommendation": "", "ritz": "Gap", "aman": "Gap", "top10": "", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product"], "epic": "Booking Engine", "jira": "", "backlogStatus": "Needs Design", "story": "As a Guest, when I am asked to provide PII, I want a brief explanation as to why and what will my info be used for", "description": "Increase guest confidence in providing PII", "guidelineId": "731"}, {"channel": "APP", "theme": "Content & Merchandising", "page": "PDP", "guideline": "#740 Have at least 3\u20135 product images for the most popular products to facilitate a visual evaluation", "impact": 3.4, "effort": "L", "priority": 7, "id": "740", "suggestion": "Have at least 3\u20135 product images for the most popular products to facilitate a visual evaluation", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Part of web content guideline to be released, carousel is not available on PEP", "dependencies": "", "owner": "Product", "whatToDo": "Adress in content guideline", "currentFS": "", "recommendation": "", "ritz": "Addressed", "aman": "N/A", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Design", "Content"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "740"}, {"channel": "APP", "theme": "Content & Merchandising", "page": "Booking flow - Accom Card", "guideline": "#1958 Provide at least 10\u201315 property images as thumbnails in the search results", "impact": 3.4, "effort": "L", "priority": 7, "id": "1958", "suggestion": "Provide at least 10\u201315 property images as thumbnails in the search results", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Update on Avail results page - Need content / assets from properties over time", "dependencies": "Content", "owner": "Content", "whatToDo": "Update post-avail check accom card to hold multiple images", "currentFS": "", "recommendation": "", "ritz": "", "aman": "", "top10": "Yes", "platforms": ["App"], "teams": ["Product", "Design", "Content"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "1958"}, {"channel": "APP", "theme": "Booking (incl. Pricing & Cancellation)", "page": "Booking flow / Check out flow", "guideline": "#2234 Prominently feature the accommodation, tour and experience cancellation policy in key areas of the site", "impact": 3.4, "effort": "M", "priority": 7, "id": "2234", "suggestion": "Prominently feature the accommodation, tour and experience cancellation policy in key areas of the site", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "TBD", "dependencies": "", "owner": "Product", "whatToDo": "Surfcae cancellation policy PDP, check out flow, booking flow", "currentFS": "", "recommendation": "", "ritz": "", "aman": "", "top10": "Yes", "platforms": ["App"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "2234"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "UI Elements - Toast notification", "guideline": "#891 Ensure injected confirmations are permanent and highly visible", "impact": 2, "effort": "M", "priority": 6, "id": "891", "suggestion": "Ensure injected confirmations are permanent and highly visible", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Relook at confirmation message pattern", "currentFS": "The confirmation message doesn't stand out in the interface and is only temporarily displayed", "recommendation": "Ensure textual confirmations injected into the overview page are both permanent and highly visible, such as highlighted with a green background color and accompanited by a green checkmark", "ritz": "Gap", "aman": "N/A", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "891"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Search field", "guideline": "#363 Display \u201cdestination\u201d autocomplete suggestions predictably", "impact": 3, "effort": "L", "priority": 6, "id": "363", "suggestion": "Display \u201cdestination\u201d autocomplete suggestions predictably", "bucket": "NLS", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "Covered by NLS", "dependencies": "Solved by NLS", "owner": "Product", "whatToDo": "Introduce autocomplete fields", "currentFS": "Autocomplete suggestinos disappear after adding a single space to the end of the search query.", "recommendation": "", "ritz": "Gap", "aman": "Gap", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "363"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Search field", "guideline": "#1870 Ensure \u201cdestination\u201d autocomplete provides highly relevant suggestions", "impact": 2, "effort": "L", "priority": 6, "id": "1870", "suggestion": "Ensure \u201cdestination\u201d autocomplete provides highly relevant suggestions", "bucket": "NLS", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "Covered by NLS", "dependencies": "Solved by NLS", "owner": "Product", "whatToDo": "Introduce autocomplete fields", "currentFS": "San Domenico is the name of the Four Seasons resort in Taormina, but searching \"San domenico\" does not yield any property suggesitons wtihin destination search \"Taormina\" yields the relevant suggestion", "recommendation": "Provide \"destination\" autocomplete feature, and ensure it returns highly relevant suggestions when searching by resort name.", "ritz": "Addressed", "aman": "Gap", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "1870"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Booking flow", "guideline": "#933 Never have list items taller than half of the screen height in portrait mode", "impact": 2, "effort": "M", "priority": 6, "id": "933", "suggestion": "Never have list items taller than half of the screen height in portrait mode", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Make Accom card design shorter", "currentFS": "List items take up more than half of the viewport, with only one item fully visible in the grid. Note that sticky elemtns contribute to shortening the viewport - for instance, the sort & filter and sticket booking dates at the top of the viewport, as well as the sticky \"check rates\" button at the bottom. Note that \"checkr ates\" is not necessarily relevant to users at this stage of the booking flow", "recommendation": "Nver have list items taller than half the screen height on a currently availble standard smartphone in portrait mode. Avoide significantly reducing the size of the mobile viewport via sticky elemtns. On sites that adhere to this principle, users can see more than 2 list items in \"List view\" or 4 in \"Grid view\"", "ritz": "Gap", "aman": "Gap", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design", "Content"], "epic": "Nav", "jira": "", "backlogStatus": "Needs Design", "story": "No sticky elements", "description": "", "guidelineId": "933"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Search field", "guideline": "#404 Improve the visual design of \u201cdestination\u201d autocomplete suggestions", "impact": 1.5, "effort": "S", "priority": 6, "id": "404", "suggestion": "Improve the visual design of \u201cdestination\u201d autocomplete suggestions", "bucket": "NLS", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "Solved by NLS", "owner": "Product", "whatToDo": "Optimize dropdown UI", "currentFS": "Repeating suggestions are redundant. Note that frustration will compound on mobile, where autocomplete suggestions sometimes require scrolling to reach the bottom of the list", "recommendation": "Autocomplete widget should do \n1. contain 8 or fewer items (on desktop # should be 10 or fewer) \n2. Avoid redundant autocomplet suggestions \n3. Reduce visual competition from non-suggestion elements", "ritz": "Gap", "aman": "Gap", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "404"}, {"channel": "APP", "theme": "Search & Filtering", "page": "Filter UX", "guideline": "#467 Show the number of matches for each filter option, and update them as filters are applied", "impact": 2, "effort": "M", "priority": 6, "id": "467", "suggestion": "Show the number of matches for each filter option, and update them as filters are applied", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Maddie to complete, Design ticket created", "dependencies": "", "owner": "Product", "whatToDo": "Enhance filter UX", "currentFS": "", "recommendation": "", "ritz": "", "aman": "", "top10": "Yes", "platforms": ["App"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "467"}, {"channel": "APP", "theme": "Search & Filtering", "page": "FAHOR", "guideline": "#1001 Offer relevant autocomplete suggestions for closely misspelled search terms and queries", "impact": 2.8, "effort": "M", "priority": 6, "id": "1001", "suggestion": "Offer relevant autocomplete suggestions for closely misspelled search terms and queries", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Udita to complete", "dependencies": "", "owner": "Product", "whatToDo": "Introduce autocomplete fields", "currentFS": "", "recommendation": "", "ritz": "", "aman": "", "top10": "Yes", "platforms": ["App"], "teams": ["Product"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "1001"}, {"channel": "APP", "theme": "Booking (incl. Pricing & Cancellation)", "page": "Booking flow - Calendar", "guideline": "#1869 Indicate minimum nightly rates and unavailable dates in the calendar date picker 1/2 - Min. nightly rate", "impact": 2.6, "effort": "M", "priority": 5, "id": "1869", "suggestion": "Indicate minimum nightly rates and unavailable dates in the calendar date picker 1/2 - Min. nightly rate", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Wait for T&L on web to determine if we will bring to native app", "dependencies": "", "owner": "Product", "whatToDo": "Calendar with Min. Nightly rates", "currentFS": "", "recommendation": "", "ritz": "Gap", "aman": "Addressed", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Design"], "epic": "Booking Engine", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want to see the lowest nightly rate in the eCAW's calendar picket", "description": "Guests expect to see the lowest nightly rate in the eCAW", "guidelineId": "1869"}, {"channel": "APP", "theme": "Booking (incl. Pricing & Cancellation)", "page": "Booking flow - Calendar", "guideline": "#1869 Indicate minimum nightly rates and unavailable dates in the calendar date picker 2/2 - Unavailable dates", "impact": 2.6, "effort": "M", "priority": 5, "id": "1869", "suggestion": "Indicate minimum nightly rates and unavailable dates in the calendar date picker 2/2 - Unavailable dates", "bucket": "In progress", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Part of PMS implementation", "dependencies": "", "owner": "Product", "whatToDo": "Calendar with unavailable check in / check out dates", "currentFS": "", "recommendation": "", "ritz": "Gap", "aman": "Addressed", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Design"], "epic": "Booking Engine", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want to see the lowest nightly rate in the eCAW's calendar picket", "description": "Guests expect to see the lowest nightly rate in the eCAW", "guidelineId": "1869"}, {"channel": "WEB", "theme": "Booking (incl. Pricing & Cancellation)", "page": "Booking flow - Calendar", "guideline": "#1869 Indicate minimum nightly rates and unavailable dates in the calendar date picker 2/2 - Unavailable dates", "impact": 2.6, "effort": "M", "priority": 4, "id": "1869", "suggestion": "Indicate minimum nightly rates and unavailable dates in the calendar date picker 2/2 - Unavailable dates", "bucket": "Gap", "productTicket": "MTC-4294", "designTicket": "PD-505", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Calendar with unavailable check in / check out dates", "currentFS": "Min. nightly rates are not indicated int he calendar date picker. There is no visual distinction between availble and unavailable dates. Dates that are marked as \"limited\" are seemingly not available for online booking", "recommendation": "Provide min. nightly rate and identify unavailable dates in the calendar as early in the booking process as possible.", "ritz": "Gap", "aman": "Addressed", "top10": "Yes", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Design"], "epic": "Booking Engine", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want to see the lowest nightly rate in the eCAW's calendar picket", "description": "Guests expect to see the lowest nightly rate in the eCAW", "guidelineId": "1869"}, {"channel": "WEB", "theme": "Bug", "page": "Booking flow - mobile", "guideline": "#264 Make it clear where hit areas in visual elements lead - Fix view floor plan & details link", "impact": 1.8, "effort": "S", "priority": 3, "id": "264", "suggestion": "Make it clear where hit areas in visual elements lead - Fix view floor plan & details link", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Fix view floor plan & details link", "currentFS": "Next button wihtin booking flow doesn't click / \"view floor plan & details\" text on accom card doens't click", "recommendation": "Always make it clear which elements are l inks, and ensure that the hit area for links matches the size of the visual element.", "ritz": "Addressed", "aman": "Gap", "top10": "", "platforms": ["Mobile Web"], "teams": ["Product"], "epic": "Nav", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want the hitbox for CTA, hyperlinks & images to be consistent and fully emcapsulate the corresponding object", "description": "Hit boxes are not consistent and too small", "guidelineId": "264"}, {"channel": "WEB", "theme": "Bug", "page": "CAW - mobile", "guideline": "#264 Make it clear where hit areas in visual elements lead - Fix Next button hit area", "impact": 1.8, "effort": "S", "priority": 3, "id": "264", "suggestion": "Make it clear where hit areas in visual elements lead - Fix Next button hit area", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Fix Next button hit area", "currentFS": "Next button wihtin booking flow doesn't click / \"view floor plan & details\" text on accom card doens't click", "recommendation": "Always make it clear which elements are l inks, and ensure that the hit area for links matches the size of the visual element.", "ritz": "Addressed", "aman": "Gap", "top10": "", "platforms": ["Mobile Web"], "teams": ["Product"], "epic": "Nav", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want the hitbox for CTA, hyperlinks & images to be consistent and fully emcapsulate the corresponding object", "description": "Hit boxes are not consistent and too small", "guidelineId": "264"}, {"channel": "APP", "theme": "Navigation & Information Architecture", "page": "My account", "guideline": "#2934 Provide a separate account link outside the mobile main navigation menu", "impact": 1.8, "effort": "S", "priority": 3, "id": "2934", "suggestion": "Provide a separate account link outside the mobile main navigation menu", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "Q4 2026", "note": "Udita to complete, Design ticket created", "dependencies": "", "owner": "Product", "whatToDo": "Find a placement of \"my profiles\" on page", "currentFS": "", "recommendation": "", "ritz": "N/A", "aman": "N/A", "top10": "", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Design"], "epic": "", "jira": "", "backlogStatus": "", "story": "", "description": "", "guidelineId": "2934"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "UI Elements", "guideline": "#1083 Increase the size of tappable elements", "impact": 2, "effort": "S", "priority": 2, "id": "1083", "suggestion": "Increase the size of tappable elements", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Enhance hit area for small elements in mobile", "currentFS": "Hit areas are too small (less than 7mm x 7mm), especially that of text links throughout the booking experience. For a full list of the observed issues, see the asessment #1083M in the review tool", "recommendation": "Ensure a 7mm x 7mm hit area for all mobile UI elements, including text ilnks, form fields, navigation kmenu items, etc", "ritz": "Gap", "aman": "Gap", "top10": "", "platforms": ["Mobile Web"], "teams": ["Product", "Design"], "epic": "Nav", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want the hitbox for CTA, hyperlinks & images to be consistent and fully emcapsulate the corresponding object", "description": "Hit boxes are not consistent and too small", "guidelineId": "1083"}, {"channel": "WEB", "theme": "Booking (incl. Pricing & Cancellation)", "page": "CAW - promo code", "guideline": "#615 Always hide coupon and promotional fields behind a link", "impact": 2, "effort": "S", "priority": 2, "id": "615", "suggestion": "Always hide coupon and promotional fields behind a link", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Hide promo code behind a link", "currentFS": "There is currently an expanded promo code field in CAW", "recommendation": "Collapse promo code field by default", "ritz": "Addressed", "aman": "N/A", "top10": "", "platforms": ["Desktop Web", "Mobile Web", "App"], "teams": ["Product", "Design"], "epic": "Booking Engine", "jira": "", "backlogStatus": "Needs Design", "story": "As a Guest, I want the promo code field to be less prominent on the eCAW", "description": "Having the Promo Code field with the same visual prominence as the rest of the eCAW is decreasing our Check Rates conversion", "guidelineId": "615"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Profie - Dashboard", "guideline": "#3057 Always use clear labels and secondary text descriptions for features on the account dashboard", "impact": 2, "effort": "S", "priority": 2, "id": "3057", "suggestion": "Always use clear labels and secondary text descriptions for features on the account dashboard", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Update label text and introduce secondary text for \"edit profile\"", "currentFS": "Ambiguous lables are used in the account dashboard; \"edit profile\" does not cover the full informatino available. Only some account features provide secondary text descriptions. Likewise, only some account features have icons", "recommendation": "User clear labels and secondary text descriptions for features and groups of features on the account dashboard. Consider using icons for additional context", "ritz": "Gap", "aman": "N/A", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product", "Design"], "epic": "Profile", "jira": "", "backlogStatus": "Needs Design", "story": "As a Guest, I want to see my profile overview with icons for account features (Stay Preferences, Interests, Email Communication)", "description": "Guests are having a hard time understanding what information we have about their profile and how they can update the information", "guidelineId": "3057"}, {"channel": "WEB", "theme": "Usability Enhancements", "page": "Image gallery on products", "guideline": "#1142 Support pinch-to-zoom", "impact": 2.8, "effort": "S", "priority": 1, "id": "1142", "suggestion": "Support pinch-to-zoom", "bucket": "Gap", "productTicket": "", "designTicket": "", "targetDate": "End of Q4 2026", "note": "", "dependencies": "", "owner": "Product", "whatToDo": "Support pinch-to-zoom", "currentFS": "Not supported int he main product gallery image", "recommendation": "Always support pinch-to-zoom sitewide, especially for product images", "ritz": "Addressed", "aman": "Gap", "top10": "", "platforms": ["Desktop Web", "Mobile Web"], "teams": ["Product"], "epic": "Nav", "jira": "", "backlogStatus": "Ready for Dev", "story": "As a Guest, I want to be able to do pinch to zoom on mobile-view throughtout the web", "description": "Guests cannot zoom into the mobile view to see details of what is written or inspect images closely", "guidelineId": "1142"}]</script>
 <script>
 const DATA = JSON.parse(document.getElementById('dataPayload').textContent);
-const STATUS_STORAGE_KEY = 'roadmap_status_overrides_v2';
-
-// Status definitions
-const STATUSES = {
-  'Identified': { key: 'identified', label: 'Identified', order: 0 },
-  'Ticket Created': { key: 'ticket-created', label: 'Ticket Created', order: 1 },
-  'In Planning': { key: 'in-planning', label: 'In Planning', order: 2 },
-  'In Design': { key: 'in-design', label: 'In Design', order: 3 },
-  'In Development': { key: 'in-development', label: 'In Development', order: 4 },
-  'In QA': { key: 'in-qa', label: 'In QA', order: 5 },
-  'In UAT': { key: 'in-uat', label: 'In UAT', order: 6 },
-  'In Production': { key: 'in-production', label: 'In Production', order: 7 }
-};
 
 function getStatusInfo(status) {
+  const STATUSES = {
+    'Identified': { key: 'identified', label: 'Identified', cls: 'badge-identified', color: '#999', order: 0 },
+    'Ticket Created': { key: 'ticket-created', label: 'Ticket Created', cls: 'badge-ticket-created', color: '#1565C0', order: 1 },
+    'In Planning': { key: 'in-planning', label: 'In Planning', cls: 'badge-in-planning', color: '#3D441E', order: 2 },
+    'In Design': { key: 'in-design', label: 'In Design', cls: 'badge-in-design', color: '#7B1FA2', order: 3 },
+    'In Development': { key: 'in-development', label: 'In Development', cls: 'badge-in-development', color: '#B6533E', order: 4 },
+    'In QA': { key: 'in-qa', label: 'In QA', cls: 'badge-in-qa', color: '#00695C', order: 5 },
+    'In UAT': { key: 'in-uat', label: 'In UAT', cls: 'badge-in-uat', color: '#3949AB', order: 6 },
+    'In Production': { key: 'in-production', label: 'In Production', cls: 'badge-in-production', color: '#3D441E', order: 7 }
+  };
   if (STATUSES[status]) return STATUSES[status];
+  // Fallback for legacy values
   return STATUSES['Identified'];
 }
 
+const STATUS_ORDER = ['Identified', 'Ticket Created', 'In Planning', 'In Design', 'In Development', 'In QA', 'In UAT', 'In Production'];
+
+// Map old bucket values to new status workflow
 function mapBucketToStatus(bucket) {
   const b = (bucket || '').toLowerCase();
   if (b.includes('not addressing')) return 'Identified';
@@ -489,31 +934,14 @@ function mapBucketToStatus(bucket) {
   return 'Identified';
 }
 
+// Initialize each data item with a mapped status
 DATA.forEach(d => { d.mappedStatus = mapBucketToStatus(d.bucket); });
 
-function getItemKey(d) {
-  return d.channel + '|' + d.guidelineId + '|' + (d.page || '') + '|' + (d.guideline || '').substring(0, 40);
-}
-
-function getStatusOverrides() {
-  try { return JSON.parse(localStorage.getItem(STATUS_STORAGE_KEY) || '{}'); }
-  catch(e) { return {}; }
-}
-
-function getEffectiveStatus(d) {
-  const overrides = getStatusOverrides();
-  const key = getItemKey(d);
-  if (overrides[key]) return overrides[key];
-  return d.mappedStatus || 'Identified';
-}
-
-// Determine if an item is "done" (in production), "in progress" (any dev stage), or "pending"
-function getItemState(d) {
-  const status = getEffectiveStatus(d);
-  const key = getStatusInfo(status).key;
-  if (key === 'in-production') return 'done';
-  if (['in-development','in-qa','in-uat','in-design'].includes(key)) return 'in-progress';
-  return 'pending';
+function impactColor(impact) {
+  if (impact >= 3.0) return '#B6533E';   /* Earthen — highest impact */
+  if (impact >= 2.5) return '#3D441E';   /* Ever Green — high impact */
+  if (impact >= 2.0) return '#6B5440';   /* Warm Stone dark — medium impact */
+  return '#888';
 }
 
 function escapeHtml(s) {
@@ -521,166 +949,576 @@ function escapeHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// === Render Summary KPIs ===
-function renderSummary() {
-  const total = DATA.length;
-  const done = DATA.filter(d => getItemState(d) === 'done').length;
-  const inProgress = DATA.filter(d => getItemState(d) === 'in-progress').length;
-  const pending = DATA.filter(d => getItemState(d) === 'pending').length;
-  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
-  const webTotal = DATA.filter(d => d.channel === 'WEB').length;
-  const webDone = DATA.filter(d => d.channel === 'WEB' && getItemState(d) === 'done').length;
-  const appTotal = DATA.filter(d => d.channel === 'APP').length;
-  const appDone = DATA.filter(d => d.channel === 'APP' && getItemState(d) === 'done').length;
-
-  document.getElementById('summaryRow').innerHTML = `
-    <div class="summary-card green">
-      <div class="s-label">Findings Addressed</div>
-      <div class="s-value">${done}/${total}</div>
-      <div class="s-sub">${pct}% of all findings closed</div>
-    </div>
-    <div class="summary-card blue">
-      <div class="s-label">In Progress</div>
-      <div class="s-value">${inProgress}</div>
-      <div class="s-sub">In design, development, QA, or UAT</div>
-    </div>
-    <div class="summary-card grey">
-      <div class="s-label">Not Yet Started</div>
-      <div class="s-value">${pending}</div>
-      <div class="s-sub">Identified or ticket created</div>
-    </div>
-    <div class="summary-card">
-      <div class="s-label">Website Progress</div>
-      <div class="s-value">${webDone}/${webTotal}</div>
-      <div class="s-sub">${Math.round(webDone/webTotal*100)}% addressed</div>
-    </div>
-    <div class="summary-card">
-      <div class="s-label">Mobile App Progress</div>
-      <div class="s-value">${appDone}/${appTotal}</div>
-      <div class="s-sub">${Math.round(appDone/appTotal*100)}% addressed</div>
-    </div>
-  `;
+function getEffectiveStatus(itemKey, originalStatus) {
+  const overrides = getStatusOverrides();
+  if (overrides[itemKey]) return overrides[itemKey];
+  return originalStatus || 'Identified';
 }
 
-// === Render Overall Progress Bar ===
-function renderProgressBar() {
+function renderKPIs() {
+  const total = DATA.length;
+  const inProd = DATA.filter(d => getStatusInfo(getEffectiveStatus(getItemKeyForData(d), d.mappedStatus)).key === 'in-production').length;
+  const inDev = DATA.filter(d => {
+    const k = getStatusInfo(getEffectiveStatus(getItemKeyForData(d), d.mappedStatus)).key;
+    return ['in-development','in-qa','in-uat'].includes(k);
+  }).length;
+  const inDesign = DATA.filter(d => getStatusInfo(getEffectiveStatus(getItemKeyForData(d), d.mappedStatus)).key === 'in-design').length;
+  const identified = DATA.filter(d => {
+    const k = getStatusInfo(getEffectiveStatus(getItemKeyForData(d), d.mappedStatus)).key;
+    return ['identified','ticket-created','in-planning'].includes(k);
+  }).length;
+  const web = DATA.filter(d => d.channel === 'WEB').length;
+  const app = DATA.filter(d => d.channel === 'APP').length;
+  const top10 = DATA.filter(d => d.top10 && d.top10.toLowerCase().includes('yes')).length;
+  const pct = Math.round((inProd / total) * 100);
+
+  document.getElementById('kpiRow').innerHTML = `
+    <div class="kpi-card gold">
+      <div class="kpi-label">Total Findings</div>
+      <div class="kpi-value">${total}</div>
+      <div class="kpi-sub">${web} Web &middot; ${app} App</div>
+    </div>
+    <div class="kpi-card success">
+      <div class="kpi-label">In Production</div>
+      <div class="kpi-value">${inProd}</div>
+      <div class="kpi-sub">${pct}% of roadmap</div>
+    </div>
+    <div class="kpi-card warning">
+      <div class="kpi-label">In Dev / QA / UAT</div>
+      <div class="kpi-value">${inDev}</div>
+      <div class="kpi-sub">Active workstreams</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Identified / Planning</div>
+      <div class="kpi-value">${identified}</div>
+      <div class="kpi-sub">Not yet in design</div>
+    </div>
+    <div class="kpi-card info">
+      <div class="kpi-label">Top 10 Priority</div>
+      <div class="kpi-value">${top10}</div>
+      <div class="kpi-sub">Flagged critical</div>
+    </div>
+  `;
+
+  // Channel tab counts
+  document.getElementById('count-all').textContent = total;
+  document.getElementById('count-WEB').textContent = web;
+  document.getElementById('count-APP').textContent = app;
+}
+
+function renderProgress() {
+  // Use filtered data (reflects channel tabs, theme pills, status/owner filters, search)
+  const data = filteredData.length ? filteredData : DATA;
+  const total = data.length;
+  if (total === 0) {
+    document.getElementById('progressBar').innerHTML = '';
+    document.getElementById('progressLegend').innerHTML = '<div class="legend-item" style="color:var(--text-muted);">No items match current filters.</div>';
+    return;
+  }
+
+  const statuses = {};
+  data.forEach(d => {
+    const key = getItemKeyForData(d);
+    const effStatus = getEffectiveStatus(key, d.mappedStatus);
+    const s = getStatusInfo(effStatus);
+    statuses[s.key] = statuses[s.key] || { ...s, count: 0 };
+    statuses[s.key].count++;
+  });
+
   const order = ['identified','ticket-created','in-planning','in-design','in-development','in-qa','in-uat','in-production'];
   const colors = { 'identified':'#B0B0B0','ticket-created':'#90CAF9','in-planning':'#64B5F6','in-design':'#42A5F5','in-development':'#2196F3','in-qa':'#1E88E5','in-uat':'#1565C0','in-production':'#4CAF50' };
   const labels = { 'identified':'Identified','ticket-created':'Ticket Created','in-planning':'In Planning','in-design':'In Design','in-development':'In Development','in-qa':'In QA','in-uat':'In UAT','in-production':'In Production' };
 
-  const statuses = {};
-  order.forEach(k => statuses[k] = { count: 0, label: labels[k], color: colors[k] });
-  DATA.forEach(d => {
-    const k = getStatusInfo(getEffectiveStatus(d)).key;
-    if (statuses[k]) statuses[k].count++;
-  });
-
-  const total = DATA.length;
   let barHtml = '';
   let legendHtml = '';
   order.forEach(key => {
-    const s = statuses[key];
-    if (s.count > 0) {
-      const pct = (s.count / total) * 100;
-      barHtml += '<div class="progress-segment" style="flex:' + pct + ';background:' + s.color + ';" title="' + s.label + ': ' + s.count + '">' + (pct > 5 ? s.count : '') + '</div>';
+    if (statuses[key]) {
+      const pct = (statuses[key].count / total) * 100;
+      barHtml += `<div class="progress-segment" style="flex:${pct};background:${colors[key]};" title="${labels[key]}: ${statuses[key].count}">${pct > 5 ? statuses[key].count : ''}</div>`;
+      legendHtml += `<div class="legend-item"><span class="legend-dot" style="background:${colors[key]};"></span>${labels[key]} (${statuses[key].count})</div>`;
     }
-    legendHtml += '<div class="legend-item"><span class="legend-dot" style="background:' + s.color + ';"></span>' + s.label + ' (' + s.count + ')</div>';
   });
   document.getElementById('progressBar').innerHTML = barHtml;
   document.getElementById('progressLegend').innerHTML = legendHtml;
 }
 
-// === Render Channel Sections ===
-function renderChannels() {
-  const channels = [
-    { key: 'WEB', label: 'Website', icon: '🌐' },
-    { key: 'APP', label: 'Mobile App', icon: '📱' }
-  ];
+function populateFilters() {
+  const themes = [...new Set(DATA.map(d => d.theme))].sort();
+  const owners = [...new Set(DATA.map(d => d.owner).filter(Boolean))].sort();
 
+  // Theme pills
+  const themeCounts = {};
+  DATA.forEach(d => { themeCounts[d.theme] = (themeCounts[d.theme] || 0) + 1; });
+  let pillsHtml = `<button class="theme-pill active" onclick="setTheme('')" data-theme="">All Themes <span class="pill-count">${DATA.length}</span></button>`;
+  themes.forEach(t => {
+    pillsHtml += `<button class="theme-pill" onclick="setTheme('${escapeHtml(t)}')" data-theme="${escapeHtml(t)}">${escapeHtml(t)} <span class="pill-count">${themeCounts[t]}</span></button>`;
+  });
+  document.getElementById('themePills').innerHTML = pillsHtml;
+
+  document.getElementById('filterStatus').innerHTML = '<option value="">All Statuses</option>' + STATUS_ORDER.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+  document.getElementById('filterOwner').innerHTML = '<option value="">All Owners</option>' + owners.map(o => `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`).join('');
+}
+
+function getItemKeyForData(d) {
+  const idx = DATA.indexOf(d);
+  return d.channel + '-' + d.guidelineId + '-' + idx;
+}
+
+let currentChannel = '';
+let currentTheme = '';
+let filteredData = [...DATA];
+
+function setTheme(theme) {
+  currentTheme = theme;
+  document.querySelectorAll('.theme-pill').forEach(p => p.classList.remove('active'));
+  const target = document.querySelector(`.theme-pill[data-theme="${theme}"]`);
+  if (target) target.classList.add('active');
+  applyFilters();
+}
+
+function setChannel(ch) {
+  currentChannel = ch;
+  document.querySelectorAll('.channel-tab').forEach(t => t.classList.remove('active'));
+  const idx = ch === '' ? 0 : (ch === 'WEB' ? 1 : 2);
+  document.querySelectorAll('.channel-tab')[idx].classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const ft = currentTheme;
+  const fs = document.getElementById('filterStatus').value;
+  const fo = document.getElementById('filterOwner').value;
+  const fsearch = document.getElementById('filterSearch').value.toLowerCase();
+
+  filteredData = DATA.filter(d => {
+    if (currentChannel && d.channel !== currentChannel) return false;
+    if (ft && d.theme !== ft) return false;
+    if (fs) {
+      const key = getItemKeyForData(d);
+      const effStatus = getEffectiveStatus(key, d.mappedStatus);
+      if (effStatus !== fs) return false;
+    }
+    if (fo && d.owner !== fo) return false;
+    if (fsearch) {
+      const hay = (d.suggestion + ' ' + d.theme + ' ' + d.page + ' ' + d.id).toLowerCase();
+      if (!hay.includes(fsearch)) return false;
+    }
+    return true;
+  });
+  renderTable();
+  renderProgress();
+}
+
+function renderTable() {
+  // Sort by impact descending (high to low), then by priority descending as tiebreaker
+  const sorted = [...filteredData].sort((a, b) => {
+    const impDiff = (b.impact || 0) - (a.impact || 0);
+    if (impDiff !== 0) return impDiff;
+    return (b.priority || 0) - (a.priority || 0);
+  });
   let html = '';
-  channels.forEach(ch => {
-    const items = DATA.filter(d => d.channel === ch.key);
-    const done = items.filter(d => getItemState(d) === 'done').length;
-    const inProgress = items.filter(d => getItemState(d) === 'in-progress').length;
-    const pending = items.filter(d => getItemState(d) === 'pending').length;
-    const pct = items.length > 0 ? Math.round((done / items.length) * 100) : 0;
+  sorted.forEach((d, i) => {
+    const dataIdx = DATA.indexOf(d);
+    const itemKey = d.channel + '-' + d.guidelineId + '-' + dataIdx;
+    const effectiveStatus = getEffectiveStatus(itemKey, d.mappedStatus);
+    const s = getStatusInfo(effectiveStatus);
+    const prio = d.priority || 0;
+    const prioCls = 'prio-' + Math.min(prio, 9);
+    const chCls = d.channel === 'WEB' ? 'ch-web' : 'ch-app';
+    const platTags = (d.platforms || []).map(p => `<span class="platform-tag">${escapeHtml(p)}</span>`).join('');
+    const tickets = [];
+    if (d.productTicket) tickets.push(`<span class="ticket-link">${escapeHtml(d.productTicket)}</span>`);
+    if (d.designTicket) tickets.push(`<span class="ticket-link">${escapeHtml(d.designTicket)}</span> (design)`);
+    if (d.jira) tickets.push(`<span class="ticket-link">${escapeHtml(d.jira)}</span> (JIRA)`);
 
-    // Group by bucket
-    const buckets = {};
-    items.forEach(d => {
-      const b = d.bucket || 'Uncategorized';
-      if (!buckets[b]) buckets[b] = [];
-      buckets[b].push(d);
+    html += `<tr onclick="toggleDetail(${i})" id="row-${i}">`;
+    html += `<td class="priority-cell ${prioCls}">${prio}</td>`;
+    html += `<td><span class="ch-badge ${chCls}">${d.channel}</span></td>`;
+    html += `<td><span class="badge ${s.cls}">${s.label}</span></td>`;
+    html += `<td style="font-size:0.82rem;color:var(--text-secondary);">${escapeHtml(d.theme)}</td>`;
+    html += `<td style="font-size:0.82rem;">${escapeHtml(d.page)}</td>`;
+    html += `<td class="guideline-id-cell" style="color:var(--accent-dark);">#${escapeHtml(d.guidelineId || d.id)}</td>`;
+    html += `<td><div style="font-weight:600;line-height:1.35;">${escapeHtml(d.suggestion)}</div>`;
+    if (d.epic) html += `<span style="font-size:0.7rem;color:var(--info);font-weight:600;">${escapeHtml(d.epic)}</span>`;
+    if (d.top10 && d.top10.toLowerCase().includes('yes')) html += ` <span style="font-size:0.7rem;color:var(--gold);font-weight:600;">&#9733; TOP 10</span>`;
+    html += `</td>`;
+    html += `<td class="hide-mobile"><span class="badge ${s.cls}">${s.label}</span></td>`;
+    html += `<td class="impact-cell"><span class="impact-badge" style="background:${impactColor(d.impact)}20;color:${impactColor(d.impact)};">${d.impact}</span></td>`;
+    html += `<td><span class="effort-badge effort-${d.effort}">${d.effort}</span></td>`;
+    html += `<td class="hide-mobile" style="font-size:0.82rem;">${escapeHtml(d.owner || '—')}</td>`;
+    html += `<td class="hide-mobile" style="font-size:0.78rem;color:var(--text-secondary);">${escapeHtml(d.targetDate || '—')}</td>`;
+    html += `</tr>`;
+
+    // Detail row
+    html += `<tr class="detail-row" id="detail-${i}"><td colspan="12">`;
+    html += `<div class="detail-grid">`;
+    html += `<div class="detail-section">`;
+    html += `<h4>Current State</h4><p>${escapeHtml(d.currentFS || 'Not specified')}</p>`;
+    html += `<h4>Recommendation</h4><p>${escapeHtml(d.recommendation || 'Not specified')}</p>`;
+    html += `</div>`;
+    html += `<div class="detail-section">`;
+    html += `<h4>Action Plan</h4><p>${escapeHtml(d.whatToDo || 'Not specified')}</p>`;
+    if (d.story) html += `<h4>Backlog Story</h4><p>${escapeHtml(d.story)}</p>`;
+    if (d.note) html += `<h4>Notes</h4><p style="font-style:italic;">${escapeHtml(d.note)}</p>`;
+    if (d.dependencies) html += `<h4>Dependencies</h4><p>${escapeHtml(d.dependencies)}</p>`;
+    html += `</div></div>`;
+    html += `<div class="detail-meta">`;
+    html += `<div class="detail-meta-item"><span class="lbl">Guideline ID</span><span class="val">#${escapeHtml(d.guidelineId || d.id)}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Bucket</span><span class="val">${s.label}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Epic</span><span class="val">${escapeHtml(d.epic || '—')}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Backlog Status</span><span class="val">${escapeHtml(d.backlogStatus || '—')}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Owner</span><span class="val">${escapeHtml(d.owner || '—')}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Target Date</span><span class="val">${escapeHtml(d.targetDate || 'TBD')}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Effort</span><span class="val">${escapeHtml(d.effort)}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Impact Score</span><span class="val">${d.impact}</span></div>`;
+    if (tickets.length) html += `<div class="detail-meta-item"><span class="lbl">Tickets</span><span class="val">${tickets.join(' &middot; ')}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Platforms</span><span class="val"><div class="platform-tags">${platTags}</div></span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Competitor — Ritz</span><span class="val">${escapeHtml(d.ritz || '—')}</span></div>`;
+    html += `<div class="detail-meta-item"><span class="lbl">Competitor — Aman</span><span class="val">${escapeHtml(d.aman || '—')}</span></div>`;
+    html += `</div>`;
+
+    // Status Editor
+    const currentStatus = getEffectiveStatus(itemKey, d.mappedStatus);
+    const currentStatusInfo = getStatusInfo(currentStatus);
+    html += `<div class="status-editor-wrap">`;
+    html += `<div class="status-editor-header">`;
+    html += `<h4>Status Management</h4>`;
+    html += `<button class="status-editor-btn" onclick="openStatusForm('${itemKey}', ${i})"><i data-lucide="pencil" style="width:14px;height:14px;"></i> Change Status</button>`;
+    html += `<span class="status-current">Current: <span class="badge ${currentStatusInfo.cls}">${currentStatusInfo.label}</span></span>`;
+    html += `</div>`;
+    // Form
+    html += `<div class="status-form" id="status-form-${i}">`;
+    html += `<div class="status-form-row">`;
+    html += `<label>New Status</label>`;
+    html += `<select id="status-select-${i}">`;
+    STATUS_ORDER.forEach(st => {
+      html += `<option value="${escapeHtml(st)}">${escapeHtml(st)}</option>`;
     });
+    html += `</select>`;
+    html += `</div>`;
+    html += `<div class="status-form-row">`;
+    html += `<label>Changed By <span style="color:var(--danger);">*</span> <span style="text-transform:none;letter-spacing:0;font-size:0.7rem;color:var(--text-muted);">(required for traceability)</span></label>`;
+    html += `<input type="text" id="status-name-${i}" placeholder="Enter your name..." autocomplete="name">`;
+    html += `</div>`;
+    html += `<div class="status-form-error" id="status-error-${i}">Please enter your name to confirm the status change.</div>`;
+    html += `<div class="status-form-actions">`;
+    html += `<button class="btn-save" onclick="saveStatus('${itemKey}', ${i})">Save Status</button>`;
+    html += `<button class="btn-cancel" onclick="closeStatusForm(${i})">Cancel</button>`;
+    html += `</div>`;
+    html += `</div>`;
+    // Change history
+    html += `<div class="change-history" id="change-history-${i}"></div>`;
+    html += `</div>`;
 
-    // Sort buckets: Addressed first, then by count descending
-    const bucketOrder = Object.keys(buckets).sort((a, b) => {
-      const aDone = buckets[a].filter(d => getItemState(d) === 'done').length;
-      const bDone = buckets[b].filter(d => getItemState(d) === 'done').length;
-      return bDone - aDone || buckets[b].length - buckets[a].length;
-    });
+    html += `</td></tr>`;
+  });
+  document.getElementById('tableBody').innerHTML = html;
+  lucide.createIcons();
+}
 
-    html += '<div class="channel-section">';
-    html += '<div class="channel-header">';
-    html += '<h2>' + ch.label + '</h2>';
-    html += '<span class="channel-badge">' + items.length + ' findings</span>';
-    html += '<div class="channel-stats">';
-    html += '<div class="channel-stat"><span class="num">' + done + '</span> done</div>';
-    html += '<div class="channel-stat"><span class="num">' + inProgress + '</span> in progress</div>';
-    html += '<div class="channel-stat"><span class="num">' + pending + '</span> pending</div>';
-    html += '<div class="channel-stat"><span class="num">' + pct + '%</span> complete</div>';
+function toggleDetail(i) {
+  const row = document.getElementById('row-' + i);
+  const detail = document.getElementById('detail-' + i);
+  row.classList.toggle('expanded');
+  detail.classList.toggle('show');
+  if (detail.classList.contains('show')) {
+    renderChangeHistory(i);
+  }
+}
+
+// === Status Management ===
+const STATUS_STORAGE_KEY = 'fs_ux_roadmap_status_overrides';
+const HISTORY_STORAGE_KEY = 'fs_ux_roadmap_status_history';
+
+function getStatusOverrides() {
+  try { return JSON.parse(localStorage.getItem(STATUS_STORAGE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+
+function getStatusHistory() {
+  try { return JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+
+function getEffectiveStatus(itemKey, originalStatus) {
+  const overrides = getStatusOverrides();
+  if (overrides[itemKey]) return overrides[itemKey];
+  return originalStatus || 'Identified';
+}
+
+function openStatusForm(itemKey, i) {
+  const form = document.getElementById('status-form-' + i);
+  const currentStatus = getEffectiveStatus(itemKey, getOriginalStatus(i));
+  const select = document.getElementById('status-select-' + i);
+  select.value = currentStatus;
+  form.classList.add('show');
+  document.getElementById('status-name-' + i).focus();
+}
+
+function closeStatusForm(i) {
+  const form = document.getElementById('status-form-' + i);
+  form.classList.remove('show');
+  document.getElementById('status-error-' + i).classList.remove('show');
+  document.getElementById('status-name-' + i).classList.remove('required-empty');
+}
+
+function getOriginalStatus(i) {
+  const sorted = [...filteredData].sort((a, b) => {
+    const impDiff = (b.impact || 0) - (a.impact || 0);
+    if (impDiff !== 0) return impDiff;
+    return (b.priority || 0) - (a.priority || 0);
+  });
+  return sorted[i] ? sorted[i].mappedStatus : 'Identified';
+}
+
+function getItemKey(i) {
+  const sorted = [...filteredData].sort((a, b) => {
+    const impDiff = (b.impact || 0) - (a.impact || 0);
+    if (impDiff !== 0) return impDiff;
+    return (b.priority || 0) - (a.priority || 0);
+  });
+  const d = sorted[i];
+  if (!d) return '';
+  const idx = DATA.indexOf(d);
+  return d.channel + '-' + d.guidelineId + '-' + idx;
+}
+
+function saveStatus(itemKey, i) {
+  const nameInput = document.getElementById('status-name-' + i);
+  const name = nameInput.value.trim();
+  const errorEl = document.getElementById('status-error-' + i);
+
+  if (!name) {
+    nameInput.classList.add('required-empty');
+    errorEl.classList.add('show');
+    nameInput.focus();
+    return;
+  }
+
+  const newStatus = document.getElementById('status-select-' + i).value;
+  const oldStatus = getEffectiveStatus(itemKey, getOriginalStatus(i));
+  const oldInfo = getStatusInfo(oldStatus);
+  const newInfo = getStatusInfo(newStatus);
+
+  // Save override
+  const overrides = getStatusOverrides();
+  overrides[itemKey] = newStatus;
+  localStorage.setItem(STATUS_STORAGE_KEY, JSON.stringify(overrides));
+
+  // Save history entry
+  const history = getStatusHistory();
+  if (!history[itemKey]) history[itemKey] = [];
+  history[itemKey].push({
+    from: oldInfo.label,
+    to: newInfo.label,
+    by: name,
+    date: new Date().toISOString()
+  });
+  localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history));
+
+  // Close form
+  closeStatusForm(i);
+
+  // Update the current status display
+  const statusCurrent = document.querySelector('#detail-' + i + ' .status-current');
+  if (statusCurrent) {
+    statusCurrent.innerHTML = 'Current: <span class="badge ' + newInfo.cls + '">' + newInfo.label + '</span>';
+  }
+
+  // Update the bucket column and status column in the table row
+  const bucketCell = document.querySelector('#row-' + i + ' td:nth-child(3)');
+  if (bucketCell) bucketCell.innerHTML = '<span class="badge ' + newInfo.cls + '">' + newInfo.label + '</span>';
+  const statusCell = document.querySelector('#row-' + i + ' td.hide-mobile');
+  if (statusCell) statusCell.innerHTML = '<span class="badge ' + newInfo.cls + '">' + newInfo.label + '</span>';
+
+  // Render change history
+  renderChangeHistory(i);
+
+  // Re-render KPIs and progress bar to reflect updated status
+  refreshGlobalStats();
+}
+
+function renderChangeHistory(i) {
+  const itemKey = getItemKey(i);
+  if (!itemKey) return;
+  const history = getStatusHistory();
+  const entries = history[itemKey] || [];
+  const container = document.getElementById('change-history-' + i);
+  if (!container) return;
+
+  if (entries.length === 0) {
+    container.innerHTML = '<div class="change-history-title"><i data-lucide="history" style="width:12px;height:12px;"></i> Change History</div><div class="change-history-empty">No status changes recorded yet.</div>';
+    lucide.createIcons();
+    return;
+  }
+
+  let html = '<div class="change-history-title"><i data-lucide="history" style="width:12px;height:12px;"></i> Change History</div>';
+  html += '<div class="change-history-list">';
+  // Show most recent first
+  [...entries].reverse().forEach(entry => {
+    const date = new Date(entry.date);
+    const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' + date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    html += '<div class="change-history-item">';
+    html += '<span class="ch-from">' + escapeHtml(entry.from) + '</span>';
+    html += '<span class="ch-arrow">&rarr;</span>';
+    html += '<span class="ch-to">' + escapeHtml(entry.to) + '</span>';
+    html += '<span class="ch-by">by ' + escapeHtml(entry.by) + '</span>';
+    html += '<span class="ch-date">' + dateStr + '</span>';
     html += '</div>';
-    html += '</div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+  lucide.createIcons();
+}
 
-    html += '<div class="bucket-grid">';
-    bucketOrder.forEach(bucketName => {
-      const bucketItems = buckets[bucketName];
-      const bucketDone = bucketItems.filter(d => getItemState(d) === 'done').length;
-      const bucketInProgress = bucketItems.filter(d => getItemState(d) === 'in-progress').length;
-
-      html += '<div class="bucket-col">';
-      html += '<div class="bucket-col-header">';
-      html += '<h3>' + escapeHtml(bucketName) + '</h3>';
-      html += '<span class="bucket-count">' + bucketDone + '/' + bucketItems.length + ' done</span>';
-      html += '</div>';
-      html += '<div class="bucket-items">';
-      bucketItems.forEach(d => {
-        const state = getItemState(d);
-        const iconClass = state;
-        const icon = state === 'done' ? '✓' : state === 'in-progress' ? '◐' : '○';
-        const gid = d.guidelineId || '';
-        const guidelineText = d.guideline || d.suggestion || '';
-        // Remove the #ID prefix from the guideline text for cleaner display
-        const cleanGuideline = guidelineText.replace(/^#\d+\s*/, '');
-        const theme = d.theme || '';
-
-        html += '<div class="bucket-item">';
-        html += '<div class="item-status-icon ' + iconClass + '">' + icon + '</div>';
-        html += '<div class="item-content">';
-        html += '<div class="item-guideline"><span class="gid">#' + escapeHtml(gid) + '</span> ' + escapeHtml(cleanGuideline) + '</div>';
-        if (theme) html += '<div class="item-meta">' + escapeHtml(theme) + '</div>';
-        html += '</div>';
-        html += '</div>';
-      });
-      html += '</div>';
-      html += '</div>';
-    });
-    html += '</div>'; // bucket-grid
-    html += '</div>'; // channel-section
+function refreshGlobalStats() {
+  // Recalculate KPIs and progress bar using overridden statuses
+  const overrides = getStatusOverrides();
+  const effectiveData = DATA.map(d => {
+    const idx = DATA.indexOf(d);
+    const key = d.channel + '-' + d.guidelineId + '-' + idx;
+    return { ...d, mappedStatus: overrides[key] || d.mappedStatus };
   });
 
-  document.getElementById('channelSections').innerHTML = html;
+  const total = effectiveData.length;
+  const inProd = effectiveData.filter(d => getStatusInfo(d.mappedStatus).key === 'in-production').length;
+  const inDev = effectiveData.filter(d => {
+    const k = getStatusInfo(d.mappedStatus).key;
+    return ['in-development','in-qa','in-uat'].includes(k);
+  }).length;
+  const identified = effectiveData.filter(d => {
+    const k = getStatusInfo(d.mappedStatus).key;
+    return ['identified','ticket-created','in-planning'].includes(k);
+  }).length;
+  const top10 = effectiveData.filter(d => d.top10 && d.top10.toLowerCase().includes('yes')).length;
+  const pct = Math.round((inProd / total) * 100);
+
+  document.getElementById('kpiRow').innerHTML = `
+    <div class="kpi-card gold">
+      <div class="kpi-label">Total Findings</div>
+      <div class="kpi-value">${total}</div>
+      <div class="kpi-sub">${effectiveData.filter(d => d.channel === 'WEB').length} Web &middot; ${effectiveData.filter(d => d.channel === 'APP').length} App</div>
+    </div>
+    <div class="kpi-card success">
+      <div class="kpi-label">In Production</div>
+      <div class="kpi-value">${inProd}</div>
+      <div class="kpi-sub">${pct}% of roadmap</div>
+    </div>
+    <div class="kpi-card warning">
+      <div class="kpi-label">In Dev / QA / UAT</div>
+      <div class="kpi-value">${inDev}</div>
+      <div class="kpi-sub">Active workstreams</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Identified / Planning</div>
+      <div class="kpi-value">${identified}</div>
+      <div class="kpi-sub">Not yet in design</div>
+    </div>
+    <div class="kpi-card info">
+      <div class="kpi-label">Top 10 Priority</div>
+      <div class="kpi-value">${top10}</div>
+      <div class="kpi-sub">Flagged critical</div>
+    </div>
+  `;
+
+  // Progress bar — reflects filtered table
+  renderProgress();
 }
 
-// === Init ===
-function init() {
-  document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  renderSummary();
-  renderProgressBar();
-  renderChannels();
+function renderTimeline() {
+  const channelData = currentChannel ? DATA.filter(d => d.channel === currentChannel) : DATA;
+  const quarters = { 'End of Q4 2026': [], 'End of Q2 2027': [], 'End of Q3 2027': [], 'End of Q4 2027': [], 'Other / TBD': [] };
+  channelData.forEach(d => {
+    const td = d.targetDate || '';
+    if (td.includes('Q4 2026') || td.toLowerCase().includes('live') || td.toLowerCase().includes('test')) quarters['End of Q4 2026'].push(d);
+    else if (td.includes('Q2 2027')) quarters['End of Q2 2027'].push(d);
+    else if (td.includes('Q3 2027')) quarters['End of Q3 2027'].push(d);
+    else if (td.includes('Q4 2027')) quarters['End of Q4 2027'].push(d);
+    else quarters['Other / TBD'].push(d);
+  });
+
+  const order = ['End of Q4 2026', 'End of Q2 2027', 'End of Q3 2027', 'End of Q4 2027', 'Other / TBD'];
+  let html = '';
+  order.forEach(q => {
+    if (quarters[q].length === 0) return;
+    const sorted = quarters[q].sort((a,b) => (b.impact||0) - (a.impact||0));
+    html += `<div class="timeline-q">`;
+    html += `<div class="timeline-q-header"><span class="q-badge">${q}</span> <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:0.82rem;color:var(--text-muted);">${sorted.length} items</span></div>`;
+    html += `<div class="timeline-items">`;
+    sorted.forEach(d => {
+      const key = getItemKeyForData(d);
+      const effStatus = getEffectiveStatus(key, d.mappedStatus);
+      const s = getStatusInfo(effStatus);
+      const chCls = d.channel === 'WEB' ? 'ch-web' : 'ch-app';
+      html += `<div class="timeline-item" style="border-left-color:${s.color};">`;
+      html += `<div class="ti-top"><span class="ch-badge ${chCls}">${d.channel}</span><span class="badge ${s.cls}">${s.label}</span></div>`;
+      html += `<div class="ti-title">#${escapeHtml(d.guidelineId || d.id)} ${escapeHtml(d.suggestion)}</div>`;
+      html += `<div class="ti-meta">${escapeHtml(d.theme)} &middot; ${escapeHtml(d.page)} &middot; Owner: ${escapeHtml(d.owner || 'TBD')} &middot; Impact: ${d.impact}</div>`;
+      html += `</div>`;
+    });
+    html += `</div></div>`;
+  });
+  document.getElementById('timelineView').innerHTML = html;
 }
 
-init();
+function renderTheme() {
+  const channelData = currentChannel ? DATA.filter(d => d.channel === currentChannel) : DATA;
+  const themes = {};
+  channelData.forEach(d => { themes[d.theme] = themes[d.theme] || []; themes[d.theme].push(d); });
+  let html = '';
+  Object.keys(themes).sort().forEach(theme => {
+    const items = themes[theme].sort((a,b) => (b.impact||0) - (a.impact||0));
+    html += `<div class="theme-group">`;
+    html += `<div class="theme-header">${escapeHtml(theme)} <span class="count">${items.length}</span></div>`;
+    html += `<div class="table-wrapper"><table><thead><tr><th style="width:36px;">P</th><th style="width:60px;">Channel</th><th style="width:110px;">Bucket</th><th>Page / Element</th><th style="width:70px;">Guideline ID</th><th>Finding</th><th style="width:90px;">Status</th><th style="width:55px;">Impact</th><th style="width:90px;">Owner</th></tr></thead><tbody>`;
+    items.forEach(d => {
+      const key = getItemKeyForData(d);
+      const effStatus = getEffectiveStatus(key, d.mappedStatus);
+      const s = getStatusInfo(effStatus);
+      const chCls = d.channel === 'WEB' ? 'ch-web' : 'ch-app';
+      html += `<tr><td class="priority-cell prio-${Math.min(d.priority||0,9)}">${d.priority||0}</td>`;
+      html += `<td><span class="ch-badge ${chCls}">${d.channel}</span></td>`;
+      html += `<td><span class="badge ${s.cls}">${s.label}</span></td>`;
+      html += `<td style="font-size:0.82rem;">${escapeHtml(d.page)}</td>`;
+      html += `<td class="guideline-id-cell" style="color:var(--accent-dark);">#${escapeHtml(d.guidelineId || d.id)}</td>`;
+      html += `<td style="font-size:0.85rem;">${escapeHtml(d.suggestion)}</td>`;
+      html += `<td><span class="badge ${s.cls}">${s.label}</span></td>`;
+      html += `<td class="impact-cell"><span class="impact-badge" style="background:${impactColor(d.impact)}20;color:${impactColor(d.impact)};">${d.impact}</span></td>`;
+      html += `<td style="font-size:0.82rem;">${escapeHtml(d.owner || '—')}</td>`;
+      html += `</tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  });
+  document.getElementById('themeView').innerHTML = html;
+  lucide.createIcons();
+}
+
+function switchViewTab(ev, tab) {
+  document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view-tab-content').forEach(c => c.classList.remove('active'));
+  ev.target.closest('.view-tab').classList.add('active');
+  document.getElementById('vtab-' + tab).classList.add('active');
+  if (tab === 'timeline') renderTimeline();
+  if (tab === 'theme') renderTheme();
+}
+
+function resetFilters() {
+  currentTheme = '';
+  document.querySelectorAll('.theme-pill').forEach(p => p.classList.remove('active'));
+  document.querySelector('.theme-pill[data-theme=""]').classList.add('active');
+  document.getElementById('filterStatus').value = '';
+  document.getElementById('filterOwner').value = '';
+  document.getElementById('filterSearch').value = '';
+  applyFilters();
+}
+
+renderKPIs();
+renderProgress();
+populateFilters();
+renderTable();
+// Apply any saved status overrides to global stats on load
+refreshGlobalStats();
+lucide.createIcons();
 </script>
 </body>
 </html>
