@@ -17,7 +17,8 @@ const connectionString =
   process.env.PGHOST_URL || 
   process.env.POSTGRES_URL ||
   process.env.POSTGRES_PRIVATE_URL ||
-  null;
+  // Hardcoded fallback — Railway internal connection (works when both services are on Railway)
+  'postgresql://postgres:kVcfTjLsVBtvjwXUDPltoAnbIoVEnsRY@postgres.railway.internal:5432/railway';
 
 if (connectionString) {
   poolConfig = {
