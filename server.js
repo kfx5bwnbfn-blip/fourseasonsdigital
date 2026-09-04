@@ -189,6 +189,29 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Diagnostic endpoint — shows DB config and tests connection (no password shown)
+app.get('/api/diagnostic', async (req, res) => {
+  const config = {
+    DB_HOST: process.env.DB_HOST || '(not set, default: db)',
+    DB_PORT: process.env.DB_PORT || '(not set, default: 5432)',
+    DB_NAME: process.env.DB_NAME || '(not set, default: baymard_tracker)',
+    DB_USER: process.env.DB_USER || '(not set, default: fs_tracker)',
+    DB_PASSWORD: process.env.DB_PASSWORD ? '(set, ' + process.env.DB_PASSWORD.length + ' chars)' : '(NOT SET)',
+    DB_SSL: process.env.DB_SSL || '(not set, default: false)',
+    dbReady: _dbReady,
+  };
+  
+  // Try a test connection
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT NOW() as now');
+    client.release();
+    res.json({ ...config, connectionTest: 'SUCCESS', serverTime: result.rows[0].now });
+  } catch (err) {
+    res.json({ ...config, connectionTest: 'FAILED', error: err.message, code: err.code });
+  }
+});
+
 // Initialize database on startup
 async function initDB() {
   try {
