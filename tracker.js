@@ -480,6 +480,34 @@ async function init() {
   populateFilters();
   renderTable();
   if (typeof lucide !== 'undefined') lucide.createIcons();
+
+  // === Cross-tab sync: re-render when another tab changes a status ===
+  if (typeof onStatusChangeExternal === 'function') {
+    onStatusChangeExternal(function() {
+      renderKPIs();
+      renderProgress();
+      renderTable();
+    });
+  }
+
+  // Refresh from API when the page becomes visible again
+  document.addEventListener('visibilitychange', async function() {
+    if (!document.hidden) {
+      await fetchStatusOverrides();
+      renderKPIs();
+      renderProgress();
+      renderTable();
+    }
+  });
+
+  // Periodic poll as a fallback (every 30 seconds)
+  setInterval(async function() {
+    if (document.hidden) return;
+    await fetchStatusOverrides();
+    renderKPIs();
+    renderProgress();
+    renderTable();
+  }, 30000);
 }
 
 init();

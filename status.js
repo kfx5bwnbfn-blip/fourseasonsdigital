@@ -71,13 +71,44 @@ let _statusOverrides = {};
 let _statusHistory = {};
 let _apiReady = false;
 
+// Cross-tab sync: notify other tabs when a status changes
+const _broadcastChannel = (typeof BroadcastChannel !== 'undefined')
+  ? new BroadcastChannel('baymard-status-sync')
+  : null;
+
+// Register a callback to be called when another tab changes a status
+let _onStatusChangeExternal = null;
+function onStatusChangeExternal(fn) {
+  _onStatusChangeExternal = fn;
+}
+
+if (_broadcastChannel) {
+  _broadcastChannel.onmessage = (event) => {
+    if (event.data && event.data.type === 'status-changed') {
+      // Update local cache from the message
+      if (event.data.itemKey && event.data.newStatus) {
+        _statusOverrides[event.data.itemKey] = event.data.newStatus;
+      }
+      // Notify the page to re-render
+      if (_onStatusChangeExternal) _onStatusChangeExternal(event.data);
+    }
+  };
+}
+
 // Fetch all status overrides from the API on page load
 async function fetchStatusOverrides() {
   try {
     const resp = await fetch('/api/statuses');
     if (!resp.ok) throw new Error('Failed to fetch statuses');
     const data = await resp.json();
-    _statusOverrides = data || {};
+    // API returns an array of { item_key, status, updated_by, updated_at }
+    // Convert to a plain object keyed by item_key for fast lookups
+    _statusOverrides = {};
+    if (Array.isArray(data)) {
+      data.forEach(row => {
+        if (row.item_key) _statusOverrides[row.item_key] = row.status;
+      });
+    }
     _apiReady = true;
   } catch (e) {
     console.warn('Could not fetch status overrides from API, using empty state:', e);
@@ -117,6 +148,10 @@ async function saveStatusOverride(itemKey, newStatus, changedBy, oldStatus) {
     _statusOverrides[itemKey] = newStatus;
     if (data.history) {
       _statusHistory[itemKey] = data.history;
+    }
+    // Notify other tabs/windows that a status changed
+    if (_broadcastChannel) {
+      _broadcastChannel.postMessage({ type: 'status-changed', itemKey, newStatus, oldStatus });
     }
     return data;
   } catch (e) {
