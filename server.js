@@ -6,27 +6,43 @@ const { Pool } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Database connection — with connection timeout and error handling
-const pool = new Pool({
-  host: process.env.DB_HOST || 'db',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'baymard_tracker',
-  user: process.env.DB_USER || 'fs_tracker',
-  password: process.env.DB_PASSWORD || 'fs_tracker_secret',
-  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
-  connectionTimeoutMillis: 10000,
-  idleTimeoutMillis: 30000,
-  max: 10,
-});
+// Database connection — uses DATABASE_URL if available (Railway provides this),
+// otherwise falls back to individual DB_* variables.
+let poolConfig;
 
-// Log DB config (without password) for debugging
-console.log('DB config:', {
-  host: process.env.DB_HOST || 'db',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'baymard_tracker',
-  user: process.env.DB_USER || 'fs_tracker',
-  ssl: process.env.DB_SSL === 'true',
-});
+if (process.env.DATABASE_URL) {
+  // Railway provides DATABASE_URL automatically when a Postgres plugin is added
+  poolConfig = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.DATABASE_SSL === 'false' ? false : { rejectUnauthorized: false },
+    connectionTimeoutMillis: 10000,
+    idleTimeoutMillis: 30000,
+    max: 10,
+  };
+  console.log('DB: Using DATABASE_URL connection string');
+} else {
+  // Fallback to individual variables
+  poolConfig = {
+    host: process.env.DB_HOST || 'db',
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_NAME || 'baymard_tracker',
+    user: process.env.DB_USER || 'fs_tracker',
+    password: process.env.DB_PASSWORD || 'fs_tracker_secret',
+    ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+    connectionTimeoutMillis: 10000,
+    idleTimeoutMillis: 30000,
+    max: 10,
+  };
+  console.log('DB config:', {
+    host: process.env.DB_HOST || 'db',
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_NAME || 'baymard_tracker',
+    user: process.env.DB_USER || 'fs_tracker',
+    ssl: process.env.DB_SSL === 'true',
+  });
+}
+
+const pool = new Pool(poolConfig);
 
 // Handle pool errors so they don't crash the app
 pool.on('error', (err) => {
@@ -192,6 +208,8 @@ app.get('/api/health', (req, res) => {
 // Diagnostic endpoint — shows DB config and tests connection (no password shown)
 app.get('/api/diagnostic', async (req, res) => {
   const config = {
+    DATABASE_URL: process.env.DATABASE_URL ? '(set, ' + process.env.DATABASE_URL.length + ' chars)' : '(NOT SET)',
+    DATABASE_SSL: process.env.DATABASE_SSL || '(not set, default: ssl enabled)',
     DB_HOST: process.env.DB_HOST || '(not set, default: db)',
     DB_PORT: process.env.DB_PORT || '(not set, default: 5432)',
     DB_NAME: process.env.DB_NAME || '(not set, default: baymard_tracker)',
