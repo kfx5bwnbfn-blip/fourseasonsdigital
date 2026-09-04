@@ -1,0 +1,190 @@
+/* === Executive Summary Page — Page-Specific Styles === */
+
+/* === Summary KPIs === */
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  padding: 1.5rem 1.8rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+}
+.summary-card.green { border-top-color: var(--done); }
+.summary-card.blue { border-top-color: var(--in-progress); }
+.summary-card.grey { border-top-color: var(--pending); }
+.summary-card .s-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.summary-card .s-value {
+  font-family: 'Saol Display', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-primary);
+}
+.summary-card .s-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+}
+
+/* === Overall Progress Bar === */
+.overall-progress {
+  background: var(--bg-card);
+  border-radius: 10px;
+  padding: 1.5rem 1.8rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+.overall-progress-title {
+  font-family: 'Saol Display', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 1rem;
+  color: var(--accent);
+}
+
+/* === Channel Sections === */
+.channel-section {
+  margin-bottom: 2.5rem;
+}
+.channel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--accent);
+}
+.channel-header h2 {
+  font-family: 'Saol Display', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin: 0;
+  color: var(--accent);
+}
+.channel-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  padding: 3px 12px;
+  border-radius: 12px;
+}
+.channel-stats {
+  margin-left: auto;
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+.channel-stat { display: flex; align-items: center; gap: 0.3rem; }
+.channel-stat .num { font-weight: 700; color: var(--text-primary); font-size: 1rem; }
+
+/* === Bucket Columns === */
+.bucket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.bucket-col {
+  background: var(--bg-card);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.bucket-col-header {
+  padding: 0.8rem 1rem;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bucket-col-header h3 {
+  font-family: 'Saol Display', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin: 0;
+  color: var(--accent);
+}
+.bucket-count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.bucket-items {
+  padding: 0.5rem;
+}
+.bucket-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.5rem;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.bucket-item:hover { background: var(--bg-subtle); }
+.item-status-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  margin-top: 1px;
+}
+.item-status-icon.done {
+  background: var(--done);
+  color: #fff;
+}
+.item-status-icon.in-progress {
+  background: var(--in-progress);
+  color: #fff;
+}
+.item-status-icon.pending {
+  background: var(--pending);
+  color: #fff;
+}
+.item-content {
+  flex: 1;
+  min-width: 0;
+}
+.item-guideline {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+.item-guideline .gid {
+  font-weight: 700;
+  color: var(--accent);
+}
+.item-meta {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .bucket-grid { grid-template-columns: 1fr; }
+  .channel-stats { flex-direction: column; gap: 0.3rem; }
+}

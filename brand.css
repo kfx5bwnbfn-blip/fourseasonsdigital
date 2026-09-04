@@ -1,0 +1,204 @@
+/* === Four Seasons Brand Typography === */
+@font-face {
+  font-family: 'Saol Display';
+  src: url('../fonts/saoldisplay-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Saol Display';
+  src: url('../fonts/saoldisplay-lightitalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Saol Standard';
+  src: url('../fonts/saolstandard-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --text-primary: #000000;
+  --text-secondary: #555;
+  --text-muted: #888;
+  --bg-page: #FFFCF9;       /* White Sand */
+  --bg-card: #FFFFFF;        /* White */
+  --bg-subtle: #F5F2EE;      /* Warm Stone tint */
+  --accent: #3D441E;         /* Ever Green — brand color */
+  --accent-dark: #2A2F15;    /* Darker Ever Green */
+  --accent-light: #CBC4BC;   /* Warm Stone */
+  --gold: #3D441E;           /* Ever Green replaces gold */
+  --gold-light: #EDE9E4;    /* Warm Stone light tint */
+  --success: #3D441E;        /* Ever Green */
+  --success-light: #E8E6DF;  /* Warm Stone light */
+  --warning: #B6533E;        /* Earthen */
+  --warning-light: #F2E3DE;  /* Earthen light */
+  --danger: #B6533E;         /* Earthen */
+  --danger-light: #F2E3DE;   /* Earthen light */
+  --info: #3D441E;           /* Ever Green */
+  --info-light: #E8E6DF;     /* Warm Stone light */
+  --border: #CBC4BC;         /* Warm Stone */
+  --border-strong: #B5ACA0;  /* Warm Stone darker */
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  --warm-stone: #CBC4BC;
+  --white-sand: #FFFCF9;
+  --cashmere: #D4B59E;
+  --earthen: #B6533E;
+  --done: #4CAF50;
+  --done-light: #E8F5E9;
+  --pending: #B0B0B0;
+  --pending-light: #F0F0F0;
+  --in-progress: #2196F3;
+  --in-progress-light: #E3F2FD;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-page);
+}
+
+/* === Header === */
+header {
+  background: #3D441E;
+  color: #fff;
+  padding: 2.5rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+header::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: #CBC4BC;
+}
+
+/* === Page Navigation Tabs === */
+.page-nav {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.page-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+.page-nav-tab {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 1rem 1.8rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.page-nav-tab:hover { color: #B6533E; background: var(--bg-subtle); }
+.page-nav-tab.active {
+  color: #B6533E;
+  border-bottom-color: #B6533E;
+  font-weight: 700;
+}
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.header-title h1 {
+  font-family: 'Saol Display', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  margin: 0 0 0.3rem;
+  letter-spacing: 0.5px;
+}
+.header-title .subtitle {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.7);
+  font-style: italic;
+  font-family: 'Saol Display', Georgia, serif;
+  font-weight: 300;
+}
+.header-meta {
+  text-align: right;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+}
+.header-meta .label { display: block; text-transform: uppercase; letter-spacing: 1px; font-size: 0.7rem; }
+.header-meta .value { color: #CBC4BC; font-size: 1.1rem; font-weight: 600; }
+
+/* === Container === */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* === Progress Bar (shared) === */
+.progress-bar-container {
+  display: flex;
+  height: 36px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+  border: 1px solid var(--border);
+}
+.progress-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  transition: flex 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.progress-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  font-size: 0.82rem;
+}
+.legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+footer a:hover { text-decoration: underline; }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .header-inner { flex-direction: column; align-items: flex-start; }
+  .header-meta { text-align: left; }
+  .container { padding: 1rem; }
+}

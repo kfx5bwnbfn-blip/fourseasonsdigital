@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Four Seasons Digital — Progress Tracker</title>
+<link rel="stylesheet" href="/css/brand.css">
+<link rel="stylesheet" href="/css/tracker.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-title">
+      <h1>Digital UX Roadmap — 2026</h1>
+      <div class="subtitle">Baymard Audit Findings &middot; Progress Tracker &middot; Executive Readout</div>
+    </div>
+    <div class="header-meta">
+      <span class="label">Last Updated</span>
+      <span class="value">September 2026</span>
+    </div>
+  </div>
+</header>
+
+<nav class="page-nav">
+  <div class="page-nav-inner">
+    <a href="index.html" class="page-nav-tab">Executive Summary</a>
+    <a href="roadmap-tracker.html" class="page-nav-tab active">Progress Tracker</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="kpi-row" id="kpiRow"></div>
+
+  <div class="progress-overview">
+    <div class="section-title" style="margin-top:0;"><i data-lucide="bar-chart-3" class="icon" style="width:22px;height:22px;"></i> Overall Progress</div>
+    <div class="progress-bar-container" id="progressBar"></div>
+    <div class="progress-legend" id="progressLegend"></div>
+  </div>
+
+  <!-- Big Channel Tabs -->
+  <div class="channel-tabs">
+    <button class="channel-tab active" onclick="setChannel('')"><i data-lucide="layers" style="width:20px;height:20px;"></i> All <span class="tab-count" id="count-all">0</span></button>
+    <button class="channel-tab" onclick="setChannel('WEB')"><i data-lucide="globe" style="width:20px;height:20px;"></i> Website <span class="tab-count" id="count-WEB">0</span></button>
+    <button class="channel-tab" onclick="setChannel('APP')"><i data-lucide="smartphone" style="width:20px;height:20px;"></i> App <span class="tab-count" id="count-APP">0</span></button>
+  </div>
+
+  <!-- View Tabs -->
+  <div class="view-tabs">
+    <button class="view-tab active" onclick="switchViewTab(event,'roadmap')"><i data-lucide="list" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i>Roadmap Table</button>
+    <button class="view-tab" onclick="switchViewTab(event,'timeline')"><i data-lucide="calendar" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i>Timeline View</button>
+    <button class="view-tab" onclick="switchViewTab(event,'theme')"><i data-lucide="folder" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;"></i>By Theme</button>
+  </div>
+
+  <div class="view-tab-content active" id="vtab-roadmap">
+    <div class="filters">
+      <div class="theme-pills-wrap" style="flex-basis:100%;">
+        <label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);">Theme</label>
+        <div class="theme-pills" id="themePills"></div>
+      </div>
+      <div class="filter-group">
+        <label>Status</label>
+        <select id="filterStatus" onchange="applyFilters()"><option value="">All Statuses</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Owner</label>
+        <select id="filterOwner" onchange="applyFilters()"><option value="">All Owners</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="filterSearch" placeholder="Search findings..." oninput="applyFilters()">
+      </div>
+      <div class="filter-actions">
+        <button class="btn" onclick="resetFilters()"><i data-lucide="rotate-ccw" style="width:14px;height:14px;"></i> Reset</button>
+      </div>
+      <div class="sort-indicator"><i data-lucide="arrow-down-wide-narrow" style="width:14px;height:14px;"></i> Sorted by Impact (high to low)</div>
+    </div>
+    <div class="table-wrapper">
+      <table id="roadmapTable">
+        <thead>
+          <tr>
+            <th style="width:36px;">P</th>
+            <th style="width:60px;">Channel</th>
+            <th style="width:110px;">Bucket</th>
+            <th>Theme</th>
+            <th>Page / Element</th>
+            <th style="width:70px;">Guideline ID</th>
+            <th>Finding (Baymard Guideline)</th>
+            <th class="hide-mobile" style="width:90px;">Status</th>
+            <th style="width:55px;">Impact</th>
+            <th style="width:50px;">Effort</th>
+            <th class="hide-mobile" style="width:90px;">Owner</th>
+            <th class="hide-mobile" style="width:90px;">Target</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="view-tab-content" id="vtab-timeline">
+    <div class="timeline" id="timelineView"></div>
+  </div>
+
+  <div class="view-tab-content" id="vtab-theme">
+    <div id="themeView"></div>
+  </div>
+</div>
+
+<footer class="tracker-footer">
+  Four Seasons Digital &middot; UX Audit Roadmap Tracker &middot; Derived from Baymard audit findings &middot; Source: "Readout for Brian (End of 2026)", Action Plan tabs &amp; Product Backlog
+</footer>
+
+<script src="/js/status.js"></script>
+<script src="/js/tracker.js"></script>
+</body>
+</html>
