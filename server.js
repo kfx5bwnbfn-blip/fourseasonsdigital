@@ -207,8 +207,20 @@ app.get('/api/health', (req, res) => {
 
 // Diagnostic endpoint — shows DB config and tests connection (no password shown)
 app.get('/api/diagnostic', async (req, res) => {
+  const dbUrl = process.env.DATABASE_URL || '';
+  // Show a masked version of DATABASE_URL so we can see its format
+  let dbUrlMasked = '(NOT SET)';
+  if (dbUrl) {
+    try {
+      const u = new URL(dbUrl);
+      dbUrlMasked = 'protocol=' + u.protocol + ' host=' + u.hostname + ' port=' + u.port + ' database=' + (u.pathname || '') + ' (valid URL)';
+    } catch (e) {
+      // Not a valid URL — show first 30 chars masked
+      dbUrlMasked = 'INVALID URL, first 30 chars: ' + dbUrl.substring(0, 30).replace(/:[^:@]*@/, ':****@');
+    }
+  }
   const config = {
-    DATABASE_URL: process.env.DATABASE_URL ? '(set, ' + process.env.DATABASE_URL.length + ' chars)' : '(NOT SET)',
+    DATABASE_URL: dbUrlMasked,
     DATABASE_SSL: process.env.DATABASE_SSL || '(not set, default: ssl enabled)',
     DB_HOST: process.env.DB_HOST || '(not set, default: db)',
     DB_PORT: process.env.DB_PORT || '(not set, default: 5432)',
