@@ -156,7 +156,7 @@ function initData(DATA) {
 
 // Fetch shared data from data.json
 async function fetchData() {
-  const resp = await fetch('/data.json');
+  const resp = await fetch('/js/data.json');
   if (!resp.ok) throw new Error('Failed to fetch data.json');
   const data = await resp.json();
   return initData(data);

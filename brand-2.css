@@ -1,21 +1,21 @@
 /* === Four Seasons Brand Typography === */
 @font-face {
   font-family: 'Saol Display';
-  src: url('fonts/saoldisplay-light.woff2') format('woff2');
+  src: url('../fonts/saoldisplay-light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Saol Display';
-  src: url('fonts/saoldisplay-lightitalic.woff2') format('woff2');
+  src: url('../fonts/saoldisplay-lightitalic.woff2') format('woff2');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Saol Standard';
-  src: url('fonts/saolstandard-light.woff2') format('woff2');
+  src: url('../fonts/saolstandard-light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
