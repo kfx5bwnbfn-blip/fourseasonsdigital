@@ -1,10 +1,51 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const crypto = require('crypto');
+const session = require('express-session');
 const { Pool } = require('pg');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// === Password Protection ===
+const ACCESS_PASSWORD = process.env.ACCESS_PASSWORD || 'Baymard';
+const SESSION_SECRET = crypto.randomBytes(32).toString('hex');
+
+// Session middleware
+app.use(session({
+  secret: SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    sameSite: 'lax',
+  }
+}));
+
+// Auth middleware — protects all routes except login and public assets
+const requireAuth = (req, res, next) => {
+  // Allow login page and login API
+  if (req.path === '/login.html' || req.path === '/api/login' || req.path === '/api/health') {
+    return next();
+  }
+  // Allow static assets needed for login page
+  if (req.path === '/brand.css' || req.path === '/login.css' || req.path.endsWith('.woff2')) {
+    return next();
+  }
+  // Check session
+  if (req.session && req.session.authenticated) {
+    return next();
+  }
+  // If API request, return 401 JSON
+  if (req.path.startsWith('/api/')) {
+    return res.status(401).json({ error: 'Authentication required' });
+  }
+  // If browser request, redirect to login
+  return res.redirect('/login.html');
+};
 
 // Database connection — auto-detects Railway's PostgreSQL variables
 // Railway injects several variables when a Postgres service is linked.
@@ -82,6 +123,37 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
+// === Login / Logout API ===
+
+// Login endpoint
+app.post('/api/login', (req, res) => {
+  const { password } = req.body;
+  if (password === ACCESS_PASSWORD) {
+    req.session.authenticated = true;
+    res.json({ success: true });
+  } else {
+    res.status(401).json({ error: 'Invalid password' });
+  }
+});
+
+// Logout endpoint
+app.post('/api/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to logout' });
+    }
+    res.json({ success: true });
+  });
+});
+
+// Check auth status
+app.get('/api/auth-status', (req, res) => {
+  res.json({ authenticated: !!(req.session && req.session.authenticated) });
+});
+
+// Apply auth middleware to protect all routes
+app.use(requireAuth);
 
 // Serve static files from the root directory (flat structure)
 app.use(express.static(__dirname, {

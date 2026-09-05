@@ -99,6 +99,7 @@ if (_broadcastChannel) {
 async function fetchStatusOverrides() {
   try {
     const resp = await fetch('/api/statuses?_t=' + Date.now());
+    if (resp.status === 401) { window.location.href = '/login.html'; return _statusOverrides; }
     if (!resp.ok) throw new Error('Failed to fetch statuses');
     const data = await resp.json();
     // API returns an array of { item_key, status, updated_by, updated_at }
@@ -122,6 +123,7 @@ async function fetchStatusOverrides() {
 async function fetchHistory(itemKey) {
   try {
     const resp = await fetch('/api/history/' + encodeURIComponent(itemKey) + '?_t=' + Date.now());
+    if (resp.status === 401) { window.location.href = '/login.html'; return []; }
     if (!resp.ok) throw new Error('Failed to fetch history');
     const data = await resp.json();
     _statusHistory[itemKey] = data || [];
@@ -143,6 +145,7 @@ async function saveStatusOverride(itemKey, newStatus, changedBy, oldStatus) {
       body: JSON.stringify(body)
     });
     if (!resp.ok) {
+      if (resp.status === 401) { window.location.href = '/login.html'; throw new Error('Authentication required'); }
       const errData = await resp.json().catch(() => ({}));
       const msg = errData.error || 'Failed to save status';
       throw new Error(msg);
@@ -198,7 +201,18 @@ function initData(DATA) {
 // Fetch shared data from data.json
 async function fetchData() {
   const resp = await fetch('/data.json?_t=' + Date.now());
+  if (resp.status === 401) { window.location.href = '/login.html'; throw new Error('Authentication required'); }
   if (!resp.ok) throw new Error('Failed to fetch data.json');
   const data = await resp.json();
   return initData(data);
+}
+
+// Logout function — destroys session and redirects to login page
+async function logout() {
+  try {
+    await fetch('/api/logout', { method: 'POST' });
+  } catch (e) {
+    // Ignore errors — redirect anyway
+  }
+  window.location.href = '/login.html';
 }

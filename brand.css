@@ -150,6 +150,27 @@ header::after {
 .header-meta .label { display: block; text-transform: uppercase; letter-spacing: 1px; font-size: 0.7rem; }
 .header-meta .value { color: #CBC4BC; font-size: 1.1rem; font-weight: 600; }
 
+/* === Logout Button === */
+.logout-btn {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.logout-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+}
+
 /* === Container === */
 .container {
   max-width: 1400px;
